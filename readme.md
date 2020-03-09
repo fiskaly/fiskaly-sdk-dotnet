@@ -12,7 +12,7 @@ The fiskaly SDK includes an HTTP client that is needed<sup>[1](#fn1)</sup> for a
 
 ## How to build
 
-1. Go to https://developer.fiskaly.com/clients/downloads
+1. Go to https://developer.fiskaly.com/downloads
 2. Download both the `386` and the `amd64` Windows builds of the fiskaly Client
 3. Unzip both ZIP files in the directory `FiskalyClient`
 
