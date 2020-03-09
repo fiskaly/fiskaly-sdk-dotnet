@@ -1,6 +1,12 @@
-# fiskaly SDK for .NET Framework 2.0+ (legacy version) and .NET Standard 2.0+ (= .NET Core 2.0+, .NET Framework 4.6.1+)
+# fiskaly SDK for .NET
 
 The fiskaly SDK includes an HTTP client that is needed<sup>[1](#fn1)</sup> for accessing the [kassensichv.io](https://kassensichv.io) API that implements a cloud-based, virtual **CTSS** (Certified Technical Security System) / **TSE** (Technische Sicherheitseinrichtung) as defined by the German **KassenSichV** ([Kassen­sich­er­ungsver­ord­nung](https://www.bundesfinanzministerium.de/Content/DE/Downloads/Gesetze/2017-10-06-KassenSichV.pdf)).
+
+## Supported Versions
+
+* .NET Framework 2.0+ (legacy version - `SDK.legacy.csproj`)
+* .NET Standard 2.1+ (and therefore also .NET Framework 4.6.1+)
+* .NET Framework 4.0
 
 ## Features
 
