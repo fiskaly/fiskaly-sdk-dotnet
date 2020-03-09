@@ -8,7 +8,7 @@
 
   <!-- Project metadata -->
   <PropertyGroup>
-    <TargetFrameworks>etstandard2.1;net40</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;net40</TargetFrameworks>
     <OutputType>Library</OutputType>
     <RootNamespace>FiskalyClient</RootNamespace>
     <AssemblyName>fiskaly-dotnet-sdk</AssemblyName>
