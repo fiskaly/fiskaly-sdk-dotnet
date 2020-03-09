@@ -27,7 +27,7 @@ The fiskaly SDK includes an HTTP client that is needed<sup>[1](#fn1)</sup> for a
 When using the `dotnet` CLI, use the following command to build the project:
 
 ```
-[Fiskaly/SDK]$ dotnet build SDK.csproj
+[Fiskaly/SDK]$ dotnet build SDK.standard.csproj
 ```
 
 If you are using and older version than the earliest supported version, there is also a legacy build configuration that supports .NET Framework versions as early as .NET Framework 2.0.
