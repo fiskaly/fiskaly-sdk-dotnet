@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>FiskalyClient</RootNamespace>
-    <AssemblyName>FiskalyClient</AssemblyName>
+    <AssemblyName>SDK</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -101,6 +101,19 @@
     </None>
   </ItemGroup>
   <ItemGroup />
+  <PropertyGroup>
+    <PackageLicenseFile>../../license.txt</PackageLicenseFile>
+    <IsPackable>true</IsPackable>
+    <PackageId>fiskaly-dotnet-sdk-framework</PackageId>
+    <Title>fiskaly .NET Framework SDK</Title>
+    <Authors>benjamin.fiskaly;fiskaly</Authors>
+    <PackageDescription>This package contains the fiskaly .NET Framework 2.0+ SDK which should be used to work with our services.</PackageDescription>
+    <Copyright>fiskaly GmbH</Copyright>
+    <PackageReleaseNotes>v1.0 - initial release</PackageReleaseNotes>
+    <PackageTags>fiskaly;dotnet-sdk;fiskaly-dotnet-sdk;kassensichv</PackageTags>
+    <RepositoryUrl>https://github.com/fiskaly/fiskaly-sdk-dotnet</RepositoryUrl>
+    <RepositoryBranch>master</RepositoryBranch>
+  </PropertyGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

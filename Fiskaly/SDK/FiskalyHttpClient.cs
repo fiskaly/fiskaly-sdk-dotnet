@@ -1,23 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Fiskaly.Client;
 using Fiskaly.Client.Models;
-using Newtonsoft.Json;
-using Fiskaly.Client;
 using FiskalyClient.Errors;
-using System.Diagnostics;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace Fiskaly
 {
     public class FiskalyHttpClient
     {
         private string Context { get; set; }
+        private AbstractClient Client { get; set; }
 
         public FiskalyHttpClient(string apiKey, string apiSecret, string baseUrl)
         {
+            this.InitializeClient();
+
             byte[] payload = PayloadFactory.BuildCreateContextPayload(DateTime.Now.ToString(), apiKey, apiSecret, baseUrl);
-            string createContextResponse = ClientLibrary.Invoke(payload);
+            string createContextResponse = this.Client.Invoke(payload);
 
             SetContext(createContextResponse);
+        }
+
+        private void InitializeClient() {
+#if NET40
+            this.Client = new WindowsClient();
+
+// Non-Windows platforms are only supported through .NET Standard 2.1 at the moment
+#elif NETSTANDARD2_1
+
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                this.Client = new WindowsClient();
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                this.Client = new LinuxClient();
+            }
+            else
+            {
+                this.Client = new LinuxClient();
+            }
+// Use Windows as default for safety
+#else
+            this.Client = new WindowsClient();
+#endif
         }
 
         private string SetContext(string invocationResponse)
@@ -41,20 +69,25 @@ namespace Fiskaly
                 Context = this.Context
             });
 
-            string response = ClientLibrary.Invoke(payload);
+            string response = this.Client.Invoke(payload);
 
-            JsonRpcResponse<RequestResult> deserializedResponse = JsonConvert.DeserializeObject<JsonRpcResponse<RequestResult>>(response);
+            JsonRpcResponse<RequestResult> deserializedResponse =
+                JsonConvert.DeserializeObject<JsonRpcResponse<RequestResult>>(response);
 
             if (deserializedResponse.Error != null)
             {
-                Debug.WriteLine("Error payload: " + response);
-
                 // HTTP error
                 if (deserializedResponse.Error.Code > 0)
                 {
                     string jsonError = deserializedResponse.Error.Data.Data.Body;
                     FiskalyApiError errorBody = JsonConvert.DeserializeObject<FiskalyApiError>(jsonError);
-                    throw new FiskalyHttpError(deserializedResponse.Error.Code, errorBody.Error, errorBody.Message, errorBody.Code, deserializedResponse.RequestId);
+                    throw new FiskalyHttpError(
+                        deserializedResponse.Error.Code,
+                        errorBody.Error,
+                        errorBody.Message,
+                        errorBody.Code,
+                        deserializedResponse.RequestId
+                    );
                 }
                 else // JSON-RPC error
                 {
