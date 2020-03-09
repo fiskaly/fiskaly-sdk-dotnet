@@ -1,6 +1,12 @@
-# fiskaly SDK for .NET Framework 2.0+
+# fiskaly SDK for .NET
 
 The fiskaly SDK includes an HTTP client that is needed<sup>[1](#fn1)</sup> for accessing the [kassensichv.io](https://kassensichv.io) API that implements a cloud-based, virtual **CTSS** (Certified Technical Security System) / **TSE** (Technische Sicherheitseinrichtung) as defined by the German **KassenSichV** ([Kassen­sich­er­ungsver­ord­nung](https://www.bundesfinanzministerium.de/Content/DE/Downloads/Gesetze/2017-10-06-KassenSichV.pdf)).
+
+## Supported Versions
+
+* .NET Framework 2.0+ (legacy version - `SDK.legacy.csproj`)
+* .NET Standard 2.1+ (and therefore also .NET Framework 4.6.1+)
+* .NET Framework 4.0
 
 ## Features
 
@@ -15,6 +21,20 @@ The fiskaly SDK includes an HTTP client that is needed<sup>[1](#fn1)</sup> for a
 1. Go to https://developer.fiskaly.com/clients/downloads
 2. Download both the `386` and the `amd64` Windows builds of the fiskaly Client
 3. Unzip both ZIP files in the directory `FiskalyClient`
+
+### When using dotnet CLI
+
+When using the `dotnet` CLI, use the following command to build the project:
+
+```
+[Fiskaly/SDK]$ dotnet build SDK.standard.csproj
+```
+
+If you are using and older version than the earliest supported version, there is also a legacy build configuration that supports .NET Framework versions as early as .NET Framework 2.0.
+
+```
+[Fiskaly/SDK]$ dotnet build SDK.legacy.csproj
+```
 
 ## Usage
 
