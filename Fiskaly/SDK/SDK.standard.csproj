@@ -8,11 +8,11 @@
 
   <!-- Project metadata -->
   <PropertyGroup>
-    <TargetFramework>netcoreapp1.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net40</TargetFrameworks>
     <OutputType>Library</OutputType>
     <RootNamespace>FiskalyClient</RootNamespace>
     <AssemblyName>fiskaly-dotnet-sdk</AssemblyName>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <EnableDefaultCompileItems>true</EnableDefaultCompileItems>
     <Authors>Benjamin Auinger</Authors>
     <Company>fiskaly GmbH</Company>
@@ -71,5 +71,6 @@
     <RepositoryBranch>master</RepositoryBranch>
     <ProjectUrl>https://developer.fiskaly.com/api/kassensichv/</ProjectUrl>
     <Summary>fiskaly .NET Core SDK</Summary>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 </Project>
