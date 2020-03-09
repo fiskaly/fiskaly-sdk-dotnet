@@ -24,6 +24,12 @@ namespace Fiskaly
         }
 
         private void InitializeClient() {
+#if NET40
+            this.Client = new WindowsClient();
+
+// Non-Windows platforms are only supported through .NET Standard 2.1 at the moment
+#elif NETSTANDARD2_1
+
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
                 this.Client = new WindowsClient();
@@ -36,6 +42,10 @@ namespace Fiskaly
             {
                 this.Client = new LinuxClient();
             }
+// Use Windows as default for safety
+#else
+            this.Client = new WindowsClient();
+#endif
         }
 
         private string SetContext(string invocationResponse)
