@@ -8,11 +8,11 @@
 
   <!-- Project metadata -->
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net40</TargetFrameworks>
+    <TargetFrameworks>etstandard2.1;net40</TargetFrameworks>
     <OutputType>Library</OutputType>
     <RootNamespace>FiskalyClient</RootNamespace>
     <AssemblyName>fiskaly-dotnet-sdk</AssemblyName>
-    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <EnableDefaultCompileItems>true</EnableDefaultCompileItems>
     <Authors>Benjamin Auinger</Authors>
     <Company>fiskaly GmbH</Company>
