@@ -67,7 +67,7 @@
     <Authors>benjamin.fiskaly,fiskaly</Authors>
     <PackageDescription>This package contains the fiskaly .NET SDK which should be used to work with our services.</PackageDescription>
     <Copyright>fiskaly GmbH</Copyright>
-    <PackageReleaseNotes>v1.0 - initial release</PackageReleaseNotes>
+    <PackageReleaseNotes>v1.0.0.1 - add .NET Standard 2.0+ and .NET Framework 4.0+ support.</PackageReleaseNotes>
     <PackageTags>fiskaly dotnet-sdk fiskaly-dotnet-sdk kassensichv</PackageTags>
     <RepositoryType>GitHub</RepositoryType>
     <RepositoryUrl>https://github.com/fiskaly/fiskaly-sdk-dotnet</RepositoryUrl>
