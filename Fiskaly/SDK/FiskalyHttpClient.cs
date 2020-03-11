@@ -28,7 +28,7 @@ namespace Fiskaly
             this.Client = new WindowsClient();
 
 // Non-Windows platforms are only supported through .NET Standard 2.1 at the moment
-#elif NETSTANDARD2_1
+#elif NETSTANDARD2_0
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
