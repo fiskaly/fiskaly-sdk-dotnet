@@ -59,6 +59,31 @@ namespace Fiskaly
 
         public FiskalyHttpResponse Request(string method, string path, byte[] body, Dictionary<string, string> headers, Dictionary<string, string> query)
         {
+            if (method == null)
+            {
+                method = "GET";
+            }
+
+            if (path == null)
+            {
+                path = "/";
+            }
+
+            if (body == null)
+            {
+                body = new byte[0];
+            }
+
+            if (headers == null)
+            {
+                headers = new Dictionary<string, string>();
+            }
+
+            if (query == null)
+            {
+                query = new Dictionary<string, string>();
+            }
+
             byte[] payload = PayloadFactory.BuildRequestPayload(DateTime.Now.ToString(), new RequestParams
             {
                 Method = method,
@@ -79,7 +104,8 @@ namespace Fiskaly
                 // HTTP error
                 if (deserializedResponse.Error.Code > 0)
                 {
-                    string jsonError = deserializedResponse.Error.Data.Data.Body;
+                    string jsonError = Transformer.DecodeBase64Body(deserializedResponse.Error.Data.Data.Result.Body);
+
                     FiskalyApiError errorBody = JsonConvert.DeserializeObject<FiskalyApiError>(jsonError);
                     throw new FiskalyHttpError(
                         deserializedResponse.Error.Code,
@@ -108,7 +134,7 @@ namespace Fiskaly
                 Status = status,
                 Reason = reason,
                 Headers = deserializedResponse.Result.Header,
-                Body = Convert.FromBase64String(deserializedResponse.Result.Body)
+                Body = Transformer.DecodeBase64BytesToUtf8Bytes(deserializedResponse.Result.Body)
             };
         }
     }
