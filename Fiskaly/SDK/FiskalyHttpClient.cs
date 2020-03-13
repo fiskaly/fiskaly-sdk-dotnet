@@ -80,6 +80,8 @@ namespace Fiskaly
                 if (deserializedResponse.Error.Code > 0)
                 {
                     string jsonError = deserializedResponse.Error.Data.Data.Body;
+                    if (jsonError == null) jsonError = "";
+                    
                     FiskalyApiError errorBody = JsonConvert.DeserializeObject<FiskalyApiError>(jsonError);
                     throw new FiskalyHttpError(
                         deserializedResponse.Error.Code,
