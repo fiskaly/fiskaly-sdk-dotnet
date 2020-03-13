@@ -77,7 +77,7 @@ namespace Fiskaly.Client.Models
         public Dictionary<string, string[]> Header { get; set; }
 
         [JsonProperty("body")]
-        public string Body { get; set; }
+        public byte[] Body { get; set; }
 
         [JsonProperty("context")]
         public string Context { get; set; }
@@ -121,8 +121,8 @@ namespace Fiskaly.Client.Models
 
     public class ResponseErrorDataData
     {
-        [JsonProperty("body")]
-        public string Body { get; set; }
+        [JsonProperty("response")]
+        public RequestResult Result { get; set; }
 
         [JsonProperty("request-id")]
         public string RequestId { get; set; }
