@@ -38,9 +38,12 @@ namespace Fiskaly.Client.Models
 
         public static byte[] BuildRequestPayload(string id, RequestParams paramsValue)
         {
-            Debug.WriteLine(Encoding.UTF8.GetString(paramsValue.Body));
+            if (paramsValue.Body != null)
+            {
+                Debug.WriteLine(Encoding.UTF8.GetString(paramsValue.Body));
 
-            paramsValue.Body = EncodeHttpBody(paramsValue.Body);
+                paramsValue.Body = EncodeHttpBody(paramsValue.Body);
+            }
 
             JsonRpcRequest request = new JsonRpcRequest
             {
