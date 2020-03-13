@@ -12,10 +12,13 @@
     <OutputType>Library</OutputType>
     <RootNamespace>FiskalyClient</RootNamespace>
     <AssemblyName>fiskaly-dotnet-sdk</AssemblyName>
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <EnableDefaultCompileItems>true</EnableDefaultCompileItems>
     <Authors>Benjamin Auinger</Authors>
     <Company>fiskaly GmbH</Company>
+    <VersionPrefix>1.0.0.1</VersionPrefix>
+    <VersionSuffix>alpha</VersionSuffix>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
