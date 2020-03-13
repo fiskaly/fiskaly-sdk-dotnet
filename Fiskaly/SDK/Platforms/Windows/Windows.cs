@@ -3,8 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace Fiskaly.Client
 {
-
-    public class WindowsClient : AbstractClient
+    class WindowsClient : AbstractClient
     {
         private const string LIB_64 = "com.fiskaly.kassensichv.client-windows-amd64.dll";
         private const string LIB_32 = "com.fiskaly.kassensichv.client-windows-386.dll";
