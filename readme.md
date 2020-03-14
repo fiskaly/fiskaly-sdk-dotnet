@@ -5,7 +5,7 @@ The fiskaly SDK includes an HTTP client that is needed<sup>[1](#fn1)</sup> for a
 ## Supported Versions
 
 * .NET Framework 2.0+ (legacy version - `SDK.legacy.csproj`)
-* .NET Standard 2.1+ (and therefore also .NET Framework 4.6.1+)
+* .NET Standard 2.0+ (and therefore also .NET Framework 4.6.1+)
 * .NET Framework 4.0
 
 ## Features
@@ -16,25 +16,37 @@ The fiskaly SDK includes an HTTP client that is needed<sup>[1](#fn1)</sup> for a
 - [X] Future: [<a name="fn1">1</a>] compliance regarding [BSI CC-PP-0105-2019](https://www.bsi.bund.de/SharedDocs/Downloads/DE/BSI/Zertifizierung/Reporte/ReportePP/pp0105b_pdf.pdf?__blob=publicationFile&v=7) which mandates a locally executed SMA component for creating signed log messages. 
 - [ ] Future: Automatic offline-handling (collection and documentation according to [Anwendungserlass zu § 146a AO](https://www.bundesfinanzministerium.de/Content/DE/Downloads/BMF_Schreiben/Weitere_Steuerthemen/Abgabenordnung/AO-Anwendungserlass/2019-06-17-einfuehrung-paragraf-146a-AO-anwendungserlass-zu-paragraf-146a-AO.pdf?__blob=publicationFile&v=1))
 
-## How to build
+## Integration
 
-1. Go to https://developer.fiskaly.com/downloads
-2. Download both the `386` and the `amd64` Windows builds of the fiskaly Client
-3. Unzip both ZIP files in the directory `FiskalyClient`
+### NuGet
 
-### When using dotnet CLI
+The .NET SDK is available for download on [NuGet](https://www.nuget.org/packages/fiskaly-dotnet-sdk/1.0.0.1-alpha).
+
+#### Package Manager
+
+`PM> Install-Package fiskaly-dotnet-sdk -Version 1.0.0.1-alpha`
+
+#### .NET (dotnet) CLI
+
+`$ dotnet add package fiskaly-dotnet-sdk --version 1.0.0.1-alpha`
+
+### Client
+
+Additionaly to the SDK, you'll also need the fiskaly client. Follow these steps to integrate it into your project:
+
+1. Go to [https://developer.fiskaly.com/downloads](https://developer.fiskaly.com/downloads)
+2. Download the appropriate client build for your platform
+3. Move the client into your project output directory or somewhere within the OS search path
+
+### Manually building the project
 
 When using the `dotnet` CLI, use the following command to build the project:
 
-```
-[Fiskaly/SDK]$ dotnet build SDK.standard.csproj
-```
+`[Fiskaly/SDK]$ dotnet build SDK.standard.csproj`
 
 If you are using and older version than the earliest supported version, there is also a legacy build configuration that supports .NET Framework versions as early as .NET Framework 2.0.
 
-```
-[Fiskaly/SDK]$ dotnet build SDK.legacy.csproj
-```
+`[Fiskaly/SDK]$ dotnet build SDK.legacy.csproj`
 
 ## Usage
 
@@ -54,7 +66,7 @@ namespace Demo
         static FiskalyHttpClient client = new FiskalyHttpClient(ApiKey, ApiSecret, "https://kassensichv.io/api/v0");
 
         static void Main(string[] args)
-        { 
+        {
             FiskalyHttpResponse result = client.Request("GET", "tss", null, null, null);
             Console.WriteLine(result.Status);
             Console.WriteLine(result.Reason);
@@ -67,8 +79,7 @@ namespace Demo
 
 ## Related
 
-- [fiskaly.com](https://fiskaly.com)
-- [dashboard.fiskaly.com](https://dashboard.fiskaly.com)
-- [kassensichv.io](https://kassensichv.io)
-- [kassensichv.net](https://kassensichv.net)
-
+* [fiskaly.com](https://fiskaly.com)
+* [dashboard.fiskaly.com](https://dashboard.fiskaly.com)
+* [kassensichv.io](https://kassensichv.io)
+* [kassensichv.net](https://kassensichv.net)
