@@ -76,12 +76,6 @@
     <Content Include="..\..\FiskalyClient\com.fiskaly.kassensichv.client-windows-amd64.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="..\..\FiskalyClient\com.fiskaly.kassensichv.sma-windows-386.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="..\..\FiskalyClient\com.fiskaly.kassensichv.sma-windows-amd64.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
