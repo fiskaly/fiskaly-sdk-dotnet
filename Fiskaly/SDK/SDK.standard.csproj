@@ -3,7 +3,6 @@
   <PropertyGroup>
     <SharedLibrariesDirectory>..\..\FiskalyClient</SharedLibrariesDirectory>
     <ClientPrefix>com.fiskaly.kassensichv.client</ClientPrefix>
-    <SmaersPrefix>com.fiskaly.kassensichv.sma</SmaersPrefix>
   </PropertyGroup>
 
   <!-- Project metadata -->
@@ -38,18 +37,12 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
-  <!-- Client & SMA native libs -->
+  <!-- Client -->
   <!-- ItemGroup>
     <Content Include="$(SharedLibrariesDirectory)\$(ClientPrefix)-linux-386.so">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="$(SharedLibrariesDirectory)\$(ClientPrefix)-linux-amd64.so">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="$(SharedLibrariesDirectory)\$(SmaersPrefix)-linux-386.so">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="$(SharedLibrariesDirectory)\$(SmaersPrefix)-linux-amd64.so">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup -->
