@@ -49,7 +49,7 @@ namespace Fiskaly.Client.Tests
             byte[] encodedPayload = Transformer.EncodeJsonRpcRequest(request);
             string payload = Encoding.UTF8.GetString(encodedPayload);
 
-            Debug.WriteLine(Encoding.UTF8.GetString(encodedPayload));
+            Debug.WriteLine(payload);
 
             string result = client.Invoke(encodedPayload);
             Debug.WriteLine(result);
