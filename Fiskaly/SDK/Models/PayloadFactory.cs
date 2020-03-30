@@ -1,16 +1,16 @@
-﻿using System.Diagnostics;
-using System.Text;
-
+﻿
 namespace Fiskaly.Client.Models
 {
-    class PayloadFactory
+    static class PayloadFactory
     {
+        private const string JSON_RPC_VERSION = "2.0";
+
         public static byte[] BuildCreateContextPayload(string id, string apiKey, string apiSecret, string baseUrl)
         {
             JsonRpcRequest request = new JsonRpcRequest
             {
-                Id = id,
-                JsonRpc = "2.0",
+                RequestId = id,
+                JsonRpc = JSON_RPC_VERSION,
                 Method = "create-context",
                 Params = new CreateContextParams
                 {
@@ -25,16 +25,31 @@ namespace Fiskaly.Client.Models
 
         public static byte[] BuildRequestPayload(string id, RequestParams paramsValue)
         {
-            Debug.WriteLine(Encoding.UTF8.GetString(paramsValue.Body));
-
-            paramsValue.Body = Transformer.EncodeHttpBody(paramsValue.Body);
-
             JsonRpcRequest request = new JsonRpcRequest
             {
-                Id = id,
-                JsonRpc = "2.0",
+                RequestId = id,
+                JsonRpc = JSON_RPC_VERSION,
                 Method = "request",
                 Params = paramsValue
+            };
+
+            return Transformer.EncodeJsonRpcRequest(request);
+        }
+
+        public static byte[] BuildClientConfigurationPayload(string id, ClientConfiguration configuration)
+        {
+            JsonRpcRequest request = new JsonRpcRequest
+            {
+                RequestId = id,
+                JsonRpc = JSON_RPC_VERSION,
+                Method = "config",
+                Params = new ConfigParams
+                {
+                    ClientTimeout = configuration.ClientTimeout,
+                    SmaersTimeout = configuration.SmaersTimeout,
+                    DebugFile = configuration.DebugFile,
+                    DebugLevel = (int)configuration.DebugLevel
+                }
             };
 
             return Transformer.EncodeJsonRpcRequest(request);
