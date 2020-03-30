@@ -1,26 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace FiskalyClient.Errors
+namespace Fiskaly.Errors
 {
+    public static class ClientError
+    {
+        public const int HTTP_ERROR = -20_000;
+        public const int HTTP_TIMEOUT_ERROR = -21_000;
+    }
+
     public class FiskalyError : Exception
     {
-        public FiskalyError(string message) : base(message) { }
+        public FiskalyError(string message) : base(message ) { }
     }
 
     public class FiskalyClientError : FiskalyError
     {
         public int Code { get; private set; }
 
-        public FiskalyClientError(int code, string message) : base(message)
+        public string Error { get; private set; }
+
+        public FiskalyClientError(int code, string message, string error) : base(message)
         {
-            this.Code = code;
+            Code = code;
+            Error = error;
         }
 
         public override string ToString()
         {
-            return "{ Message: \"" + this.Message + "\", Code: \"" + this.Code + "\" }";
+            return "{ Message: \"" + Message + "\", Code: \"" + Code + "\" }";
         }
     }
 
@@ -28,22 +35,27 @@ namespace FiskalyClient.Errors
     {
         public int Status { get; private set; }
         public string Error { get; private set; }
-        public string Code { get; private set; }
+        public int Code { get; private set; }
         public string RequestId { get; private set; }
 
-        public FiskalyHttpError(int status, string error, string message, string code, string requestId) : base(message)
+        public FiskalyHttpError(int status, string error, string message, int code, string requestId) : base(message)
         {
-            this.Status = status;
-            this.Error = error;
-            this.Code = code;
-            this.RequestId = requestId;
+            Status = status;
+            Error = error;
+            Code = code;
+            RequestId = requestId;
         }
 
         public override string ToString()
         {
-            return "{ Status: \"" + this.Status + "\", Error: \""
-                + this.Error + "\", Code: \"" + this.Code
-                + "\", RequestId: \"" + this.RequestId + "\" }";
+            return "{ Status: \"" + Status + "\", Error: \""
+                + Error + "\", Code: \"" + Code
+                + "\", RequestId: \"" + RequestId + "\" }";
         }
+    }
+
+    public class FiskalyHttpTimeoutError : FiskalyError
+    {
+        public FiskalyHttpTimeoutError(string message) : base(message) { }
     }
 }
