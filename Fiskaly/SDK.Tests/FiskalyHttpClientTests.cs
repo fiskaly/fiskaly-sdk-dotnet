@@ -11,10 +11,8 @@ namespace Fiskaly.Tests
     [TestClass()]
     public class FiskalyHttpClientTests
     {
-        // public static readonly string API_KEY = System.Environment.GetEnvironmentVariable("NET_SDK_API_KEY");
-        public static readonly string API_KEY = "key";
-        public static readonly string API_SECRET = "secret";
-        // public static readonly string API_SECRET = System.Environment.GetEnvironmentVariable("NET_SDK_API_SECRET");
+        public static readonly string API_KEY = System.Environment.GetEnvironmentVariable("NET_SDK_API_KEY");
+        public static readonly string API_SECRET = System.Environment.GetEnvironmentVariable("NET_SDK_API_SECRET");
 
         public static readonly string SIGN_API_V1_PATH = "https://kassensichv.io/api/v1";
         public static readonly string SIGN_API_V0_PATH = "https://kassensichv.io/api/v0";
