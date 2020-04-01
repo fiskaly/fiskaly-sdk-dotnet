@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace Fiskaly.Client
 {
-    class LinuxClient : AbstractClient
+    public class LinuxClient : AbstractClient
     {
         private const string LIB_64 = "com.fiskaly.kassensichv.client-linux-amd64.so";
         private const string LIB_32 = "com.fiskaly.kassensichv.client-linux-386.so";

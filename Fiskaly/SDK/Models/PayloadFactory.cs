@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Fiskaly.Client.Models
 {
-    class PayloadFactory
+    public class PayloadFactory
     {
         public static byte[] BuildCreateContextPayload(string id, string apiKey, string apiSecret, string baseUrl)
         {
