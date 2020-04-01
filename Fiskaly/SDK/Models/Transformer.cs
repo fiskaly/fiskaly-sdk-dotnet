@@ -9,6 +9,7 @@ namespace Fiskaly.Client.Models
         public static byte[] EncodeJsonRpcRequest(JsonRpcRequest request)
         {
             string payload = JsonConvert.SerializeObject(request);
+            System.Diagnostics.Debug.WriteLine("Sending payload: " + payload);
             return Encoding.UTF8.GetBytes(payload);
         }
 
