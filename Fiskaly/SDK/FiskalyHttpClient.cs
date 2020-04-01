@@ -75,12 +75,16 @@ namespace Fiskaly
                 .BuildCreateContextPayload(DateTime.Now.ToString(), ApiKey, ApiSecret, BaseUrl);
 
             string createContextResponse = Client.Invoke(payload);
+            System.Diagnostics.Debug.WriteLine("CreateContextResponse: " + createContextResponse);
 
             InitialContextSet = true;
-            JsonRpcResponse<string> response = JsonConvert
-                .DeserializeObject<JsonRpcResponse<string>>(createContextResponse);
+            JsonRpcResponse<CreateContextResult> response = JsonConvert
+                .DeserializeObject<JsonRpcResponse<CreateContextResult>>(createContextResponse);
 
-            Context = response.Result;
+            ThrowOnError(response);
+
+            Context = response.Result.Context;
+            System.Diagnostics.Debug.WriteLine("Set context to: " + Context);
         }
 
         private byte[] CreateRequestPayload(string method, string path, byte[] body, Dictionary<string, string> headers, Dictionary<string, string> query)
@@ -105,17 +109,16 @@ namespace Fiskaly
 
         private FiskalyHttpError CreateFiskalyHttpError<T>(JsonRpcResponse<T> response)
         {
-            ResponseErrorData errorData = JsonConvert
-                .DeserializeObject<ResponseErrorData>(response.Error.Data.ToString());
+            ErrorData errorData = JsonConvert
+                .DeserializeObject<ErrorData>(response.Error.Data.ToString());
 
             FiskalyApiError errorBody = JsonConvert
                 .DeserializeObject<FiskalyApiError>(
-                    Transformer.DecodeBase64Body(errorData.RpcResponse.Response.Body));
+                    Transformer.DecodeBase64Body(errorData.Response.Body));
 
             string[] requestIdHeaders;
 
             errorData
-                .RpcResponse
                 .Response
                 .Headers
                 .TryGetValue("X-Request-Id", out requestIdHeaders);
@@ -126,7 +129,7 @@ namespace Fiskaly
                 response.Error.Code,
                 errorBody.Error,
                 errorBody.Message,
-                errorData.RpcResponse.Response.Status,
+                errorData.Response.Status,
                 requestId
             );
         }
@@ -168,9 +171,10 @@ namespace Fiskaly
 
             byte[] payload = CreateRequestPayload(method, path, body, headers, query);
             string invocationResponse = Client.Invoke(payload);
+            System.Diagnostics.Debug.WriteLine(invocationResponse);
 
-            JsonRpcResponse<Result> rpcResponse =
-                JsonConvert.DeserializeObject<JsonRpcResponse<Result>>(invocationResponse);
+            JsonRpcResponse<RequestResult> rpcResponse =
+                JsonConvert.DeserializeObject<JsonRpcResponse<RequestResult>>(invocationResponse);
 
             ThrowOnError(rpcResponse);
 
@@ -190,6 +194,7 @@ namespace Fiskaly
                 .BuildClientConfigurationPayload(DateTime.Now.ToString(), configuration);
 
             string invocationResponse = Client.Invoke(payload);
+            System.Diagnostics.Debug.WriteLine("ConfigureClient[invocationResponse]: " + invocationResponse);
 
             JsonRpcResponse<ConfigParams> rpcResponse =
                 JsonConvert.DeserializeObject<JsonRpcResponse<ConfigParams>>(invocationResponse);
@@ -205,6 +210,17 @@ namespace Fiskaly
                 DebugFile = config.DebugFile,
                 DebugLevel = (DebugLevel)config.DebugLevel
             };
+        }
+
+        public string Version()
+        {
+            byte[] payload = PayloadFactory
+                .BuildGetVersionPayload(DateTime.Now.ToString());
+
+            string invocationResponse = Client.Invoke(payload);
+            System.Diagnostics.Debug.WriteLine("Version[invocationResponse]: " + invocationResponse);
+
+            return invocationResponse;
         }
     }
 }
