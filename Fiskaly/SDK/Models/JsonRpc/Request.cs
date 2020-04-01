@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Fiskaly.Client.Models
 {
@@ -33,6 +34,15 @@ namespace Fiskaly.Client.Models
 
     public class RequestParams : JsonRpcParams
     {
+        [JsonProperty("request")]
+        public Request Request { get; set; }
+
+        [JsonProperty("context")]
+        public string Context { get; set; }
+    }
+
+    public class Request
+    {
         [JsonProperty("method")]
         public string Method { get; set; }
 
@@ -43,13 +53,10 @@ namespace Fiskaly.Client.Models
         public byte[] Body { get; set; }
 
         [JsonProperty("query")]
-        public object Query { get; set; }
+        public Dictionary<string, string> Query { get; set; }
 
         [JsonProperty("headers")]
-        public object Headers { get; set; }
-
-        [JsonProperty("context")]
-        public object Context { get; set; }
+        public Dictionary<string, string> Headers { get; set; }
     }
 
     public class ConfigParams : JsonRpcParams

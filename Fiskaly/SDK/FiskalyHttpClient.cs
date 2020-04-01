@@ -85,15 +85,20 @@ namespace Fiskaly
 
         private byte[] CreateRequestPayload(string method, string path, byte[] body, Dictionary<string, string> headers, Dictionary<string, string> query)
         {
-            byte[] payload = PayloadFactory.BuildRequestPayload(DateTime.Now.ToString(), new RequestParams
-            {
-                Method = method == null ? "GET" : method,
-                Path = path == null ? "/" : path,
-                Body = body == null ? new byte[0] : body,
-                Headers = headers == null ? new Dictionary<string, string>() : headers,
-                Query = query == null ? new Dictionary<string, string>() : query,
-                Context = Context
-            });
+            byte[] payload = PayloadFactory.BuildRequestPayload(DateTime.Now.ToString(),
+                new RequestParams
+                {
+                    Request = new Request
+                    {
+                        Method = method == null ? "GET" : method,
+                        Path = path == null ? "/" : path,
+                        Body = body == null ? new byte[0] : body,
+                        Headers = headers == null ? new Dictionary<string, string>() : headers,
+                        Query = query == null ? new Dictionary<string, string>() : query
+                    },
+                    Context = Context
+                }
+            );
 
             return payload;
         }
@@ -105,11 +110,12 @@ namespace Fiskaly
 
             FiskalyApiError errorBody = JsonConvert
                 .DeserializeObject<FiskalyApiError>(
-                    Transformer.DecodeBase64Body(errorData.Response.Body));
+                    Transformer.DecodeBase64Body(errorData.RpcResponse.Response.Body));
 
             string[] requestIdHeaders;
 
             errorData
+                .RpcResponse
                 .Response
                 .Headers
                 .TryGetValue("X-Request-Id", out requestIdHeaders);
@@ -120,7 +126,7 @@ namespace Fiskaly
                 response.Error.Code,
                 errorBody.Error,
                 errorBody.Message,
-                errorData.Response.Status,
+                errorData.RpcResponse.Response.Status,
                 requestId
             );
         }
@@ -161,20 +167,20 @@ namespace Fiskaly
             }
 
             byte[] payload = CreateRequestPayload(method, path, body, headers, query);
-            string responseString = Client.Invoke(payload);
+            string invocationResponse = Client.Invoke(payload);
 
-            JsonRpcResponse<RequestResult> response =
-                JsonConvert.DeserializeObject<JsonRpcResponse<RequestResult>>(responseString);
+            JsonRpcResponse<Result> rpcResponse =
+                JsonConvert.DeserializeObject<JsonRpcResponse<Result>>(invocationResponse);
 
-            ThrowOnError(response);
+            ThrowOnError(rpcResponse);
 
-            Context = response.Result.Context;
+            Context = rpcResponse.Result.Context;
 
             return new FiskalyHttpResponse
             {
-                Status = response.Result.Status,
-                Headers = response.Result.Headers,
-                Body = Transformer.DecodeBase64BytesToUtf8Bytes(response.Result.Body)
+                Status = rpcResponse.Result.Response.Status,
+                Headers = rpcResponse.Result.Response.Headers,
+                Body = Transformer.DecodeBase64BytesToUtf8Bytes(rpcResponse.Result.Response.Body)
             };
         }
 
@@ -183,14 +189,14 @@ namespace Fiskaly
             byte[] payload = PayloadFactory
                 .BuildClientConfigurationPayload(DateTime.Now.ToString(), configuration);
 
-            string responseString = Client.Invoke(payload);
+            string invocationResponse = Client.Invoke(payload);
 
-            JsonRpcResponse<ConfigParams> response =
-                JsonConvert.DeserializeObject<JsonRpcResponse<ConfigParams>>(responseString);
+            JsonRpcResponse<ConfigParams> rpcResponse =
+                JsonConvert.DeserializeObject<JsonRpcResponse<ConfigParams>>(invocationResponse);
 
-            ThrowOnError(response);
+            ThrowOnError(rpcResponse);
 
-            ConfigParams config = response.Result;
+            ConfigParams config = rpcResponse.Result;
 
             return new ClientConfiguration
             {

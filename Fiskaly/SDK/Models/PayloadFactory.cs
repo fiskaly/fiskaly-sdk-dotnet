@@ -1,5 +1,4 @@
-﻿
-namespace Fiskaly.Client.Models
+﻿namespace Fiskaly.Client.Models
 {
     static class PayloadFactory
     {

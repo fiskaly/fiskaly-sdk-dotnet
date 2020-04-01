@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Text;
-using System.Diagnostics;
 
 namespace Fiskaly.Client.Models
 {

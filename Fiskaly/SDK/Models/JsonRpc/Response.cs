@@ -18,7 +18,16 @@ namespace Fiskaly.Client.Models
         public string RequestId { get; set; }
     }
 
-    public class RequestResult
+    public class Result
+    {
+        [JsonProperty("response")]
+        public Response Response { get; set; }
+
+        [JsonProperty("context")]
+        public string Context { get; set; }
+    }
+
+    public class Response
     {
         [JsonProperty("status")]
         public int Status { get; set; }
@@ -28,9 +37,6 @@ namespace Fiskaly.Client.Models
 
         [JsonProperty("body")]
         public byte[] Body { get; set; }
-
-        [JsonProperty("context")]
-        public string Context { get; set; }
     }
 
     public class FiskalyApiError
@@ -63,6 +69,6 @@ namespace Fiskaly.Client.Models
     public class ResponseErrorData
     {
         [JsonProperty("response")]
-        public RequestResult Response { get; set; }
+        public Result RpcResponse { get; set; }
     }
 }
