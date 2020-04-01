@@ -15,7 +15,8 @@
                 {
                     ApiKey = apiKey,
                     ApiSecret = apiSecret,
-                    BaseUrl = baseUrl
+                    BaseUrl = baseUrl,
+                    SdkVersion = Constants.SDK_VERSION
                 }
             };
 
@@ -49,6 +50,19 @@
                     DebugFile = configuration.DebugFile,
                     DebugLevel = (int)configuration.DebugLevel
                 }
+            };
+
+            return Transformer.EncodeJsonRpcRequest(request);
+        }
+
+        public static byte[] BuildGetVersionPayload(string id)
+        {
+            JsonRpcRequest request = new JsonRpcRequest
+            {
+                RequestId = id,
+                JsonRpc = JSON_RPC_VERSION,
+                Method = "version",
+                Params = new RequestParams { },
             };
 
             return Transformer.EncodeJsonRpcRequest(request);
