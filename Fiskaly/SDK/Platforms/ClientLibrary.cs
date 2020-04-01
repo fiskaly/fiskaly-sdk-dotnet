@@ -27,7 +27,7 @@ namespace Fiskaly.Client
         protected const string SYMBOL_FREE = "_fiskaly_client_free";
 
         protected const string LIB_PREFIX = "com.fiskaly.client";
-        protected const string CLIENT_VERSION = "v1.0.0";
+        protected const string CLIENT_VERSION = Constants.CLIENT_VERSION;
 
         abstract protected IntPtr PerformInvokeForArchitecure(byte[] request);
         abstract protected void PerformFreeForArchitecture(IntPtr allocatedMemory);
