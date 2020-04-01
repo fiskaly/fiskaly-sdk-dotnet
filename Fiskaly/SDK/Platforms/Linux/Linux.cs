@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace Fiskaly.Client
 {
-    class LinuxClient : AbstractClient
+    public class LinuxClient : AbstractClient
     {
         private const string PLATFORM = "linux";
         private const string EXTENSION = ".so";

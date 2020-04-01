@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace Fiskaly.Client
 {
-    class WindowsClient : AbstractClient
+    public class WindowsClient : AbstractClient
     {
         private const string PLATFORM = "windows";
         private const string EXTENSION = ".dll";

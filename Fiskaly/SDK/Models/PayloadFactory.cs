@@ -1,6 +1,6 @@
 ﻿namespace Fiskaly.Client.Models
 {
-    static class PayloadFactory
+    public static class PayloadFactory
     {
         private const string JSON_RPC_VERSION = "2.0";
 
