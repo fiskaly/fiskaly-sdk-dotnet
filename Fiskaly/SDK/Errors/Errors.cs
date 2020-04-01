@@ -16,7 +16,6 @@ namespace Fiskaly.Errors
     public class FiskalyClientError : FiskalyError
     {
         public int Code { get; private set; }
-
         public string Error { get; private set; }
 
         public FiskalyClientError(int code, string message, string error) : base(message)
