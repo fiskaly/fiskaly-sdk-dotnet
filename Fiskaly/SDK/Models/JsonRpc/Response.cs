@@ -18,7 +18,13 @@ namespace Fiskaly.Client.Models
         public string RequestId { get; set; }
     }
 
-    public class Result
+    public class CreateContextResult
+    {
+        [JsonProperty("context")]
+        public string Context;
+    }
+
+    public class RequestResult
     {
         [JsonProperty("response")]
         public Response Response { get; set; }
@@ -66,9 +72,9 @@ namespace Fiskaly.Client.Models
         public object Data { get; set; }
     }
 
-    public class ResponseErrorData
+    public class ErrorData
     {
         [JsonProperty("response")]
-        public Result RpcResponse { get; set; }
+        public Response Response { get; set; }
     }
 }

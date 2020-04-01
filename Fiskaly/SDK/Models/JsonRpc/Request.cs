@@ -30,6 +30,9 @@ namespace Fiskaly.Client.Models
 
         [JsonProperty("base_url")]
         public string BaseUrl { get; set; }
+
+        [JsonProperty("sdk_version")]
+        public string SdkVersion { get; set; }
     }
 
     public class RequestParams : JsonRpcParams
