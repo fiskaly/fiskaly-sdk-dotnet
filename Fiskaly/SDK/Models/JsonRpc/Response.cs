@@ -77,4 +77,25 @@ namespace Fiskaly.Client.Models
         [JsonProperty("response")]
         public Response Response { get; set; }
     }
+
+    public class VersionData
+    {
+        [JsonProperty("smaers")]
+        public VersionRow SmaersVersion { get; set; }
+
+        [JsonProperty("client")]
+        public VersionRow ClientVersion { get; set; }
+    }
+
+    public class VersionRow
+    {
+        [JsonProperty("version")]
+        public string Version { get; set; }
+
+        [JsonProperty("source_hash")]
+        public string SourceHash { get; set; }
+
+        [JsonProperty("commit_hash")]
+        public string CommitHash { get; set; }
+    }
 }

@@ -36,20 +36,14 @@
             return Transformer.EncodeJsonRpcRequest(request);
         }
 
-        public static byte[] BuildClientConfigurationPayload(string id, ClientConfiguration configuration)
+        public static byte[] BuildClientConfigurationPayload(string id, ConfigParams configParams)
         {
             JsonRpcRequest request = new JsonRpcRequest
             {
                 RequestId = id,
                 JsonRpc = JSON_RPC_VERSION,
                 Method = "config",
-                Params = new ConfigParams
-                {
-                    ClientTimeout = configuration.ClientTimeout,
-                    SmaersTimeout = configuration.SmaersTimeout,
-                    DebugFile = configuration.DebugFile,
-                    DebugLevel = (int)configuration.DebugLevel
-                }
+                Params = configParams
             };
 
             return Transformer.EncodeJsonRpcRequest(request);
@@ -62,7 +56,7 @@
                 RequestId = id,
                 JsonRpc = JSON_RPC_VERSION,
                 Method = "version",
-                Params = new RequestParams { },
+                Params = new JsonRpcParams { },
             };
 
             return Transformer.EncodeJsonRpcRequest(request);

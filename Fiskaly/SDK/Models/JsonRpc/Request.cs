@@ -64,6 +64,15 @@ namespace Fiskaly.Client.Models
 
     public class ConfigParams : JsonRpcParams
     {
+        [JsonProperty("config")]
+        public Configuration Configuration { get; set; }
+
+        [JsonProperty("context")]
+        public string Context { get; set; }
+    }
+
+    public class Configuration
+    {
         [JsonProperty("debug_level")]
         public int DebugLevel { get; set; }
 
