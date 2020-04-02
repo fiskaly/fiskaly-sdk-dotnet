@@ -26,7 +26,7 @@ namespace Fiskaly.Errors
 
         public override string ToString()
         {
-            return "{ Message: \"" + Message + "\", Code: \"" + Code + "\" }";
+            return "{\n\tMessage: \"" + Message + "\n\t\",\n\tCode: \"" + Code + "\"\n\t Error: " + Error + "\n}";
         }
     }
 
