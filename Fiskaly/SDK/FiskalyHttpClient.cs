@@ -190,8 +190,23 @@ namespace Fiskaly
 
         public ClientConfiguration ConfigureClient(ClientConfiguration configuration)
         {
+            if (!InitialContextSet)
+            {
+                InitializeContext();
+            }
+
             byte[] payload = PayloadFactory
-                .BuildClientConfigurationPayload(DateTime.Now.ToString(), configuration);
+                .BuildClientConfigurationPayload(DateTime.Now.ToString(), new ConfigParams
+                {
+                    Configuration = new Configuration
+                    {
+                        ClientTimeout = configuration.ClientTimeout,
+                        SmaersTimeout = configuration.SmaersTimeout,
+                        DebugFile = configuration.DebugFile,
+                        DebugLevel = (int)configuration.DebugLevel
+                    },
+                    Context = Context
+                });
 
             string invocationResponse = Client.Invoke(payload);
             System.Diagnostics.Debug.WriteLine("ConfigureClient[invocationResponse]: " + invocationResponse);
@@ -201,7 +216,8 @@ namespace Fiskaly
 
             ThrowOnError(rpcResponse);
 
-            ConfigParams config = rpcResponse.Result;
+            Configuration config = rpcResponse.Result.Configuration;
+            Context = rpcResponse.Result.Context;
 
             return new ClientConfiguration
             {
@@ -212,7 +228,7 @@ namespace Fiskaly
             };
         }
 
-        public string Version()
+        public Models.Version Version()
         {
             byte[] payload = PayloadFactory
                 .BuildGetVersionPayload(DateTime.Now.ToString());
@@ -220,7 +236,31 @@ namespace Fiskaly
             string invocationResponse = Client.Invoke(payload);
             System.Diagnostics.Debug.WriteLine("Version[invocationResponse]: " + invocationResponse);
 
-            return invocationResponse;
+            JsonRpcResponse<VersionData> rpcResponse =
+                JsonConvert.DeserializeObject<JsonRpcResponse<VersionData>>(invocationResponse);
+
+            ThrowOnError(rpcResponse);
+
+            VersionData versions = rpcResponse.Result;
+
+            Models.Version version = new Models.Version
+            {
+                ClientVersion = new Models.ComponentVersion
+                {
+                    Version = versions.ClientVersion.Version,
+                    CommitHash = versions.ClientVersion.CommitHash,
+                    SourceHash = versions.ClientVersion.SourceHash
+                },
+                SmaersVersion = new Models.ComponentVersion
+                {
+                    Version = versions.SmaersVersion.Version,
+                    CommitHash = versions.SmaersVersion.CommitHash,
+                    SourceHash = versions.SmaersVersion.SourceHash
+                },
+                SdkVersion = Constants.SDK_VERSION
+            };
+
+            return version;
         }
     }
 }
