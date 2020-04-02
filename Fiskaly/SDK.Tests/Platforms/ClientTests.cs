@@ -22,11 +22,10 @@ namespace Fiskaly.Client.Tests
             return new LinuxClient();
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void TestCStringConversion()
         {
             AbstractClient client = GetClientInstance();
-            Debug.WriteLine("Client: " + client);
 
             string input = "/äöü+#*'_-?ß!§$%&/()=<>|😀 😁 😂 🤣 😃 😄 😅 😆 😉 😊 😋 😎 😍 😘 🥰 😗 😙 😚 ☺️ 🙂 🤗 🤩 🤔 🤨 😐 😑 😶 🙄 😏 😣 😥 😮 🤐 😯 😪 😫 😴 😌 😛 😜 😝 🤤 😒 😓 😔 😕 🙃 🤑 😲 ☹️ 🙁 😖 😞 😟 😤 😢 😭 😦 😧 😨 😩 🤯 😬 😰 😱 🥵 🥶 😳 🤪 😵 😡 😠 🤬 😷 🤒";
             byte[] encodedInput = Encoding.UTF8.GetBytes(input);
@@ -51,11 +50,8 @@ namespace Fiskaly.Client.Tests
             };
 
             byte[] encodedPayload = Transformer.EncodeJsonRpcRequest(request);
-            string payload = Encoding.UTF8.GetString(encodedPayload);
-
-            Debug.WriteLine(payload);
-
             string result = client.Invoke(encodedPayload);
+
             Debug.WriteLine(result);
 
             JsonRpcResponse<RequestParams> deserializedResponse =
@@ -66,6 +62,21 @@ namespace Fiskaly.Client.Tests
             string decodedInput = Transformer.DecodeBase64Body(deserializedResponse.Result.Request.Body);
 
             Assert.AreEqual(input, decodedInput);
+        }
+
+        [TestMethod()]
+        public void FaultyStringShouldCauseError()
+        {
+            AbstractClient client = GetClientInstance();
+
+            string faultyString = "faulty test";
+            byte[] encoded = Encoding.UTF8.GetBytes(faultyString);
+
+            encoded[1] = 0xFE;
+
+            string invocation = client.Invoke(encoded);
+
+            Assert.IsTrue(invocation.Contains("encoding error"));
         }
     }
 }
