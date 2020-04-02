@@ -23,11 +23,11 @@ The .NET SDK is available for download on [NuGet](https://www.nuget.org/packages
 
 #### Package Manager
 
-`PM> Install-Package fiskaly-dotnet-sdk -Version 1.1.0r1`
+`PM> Install-Package fiskaly-dotnet-sdk -Version 1.1.0-r1`
 
 #### .NET (dotnet) CLI
 
-`$ dotnet add package fiskaly-dotnet-sdk --version 1.1.0r1`
+`$ dotnet add package fiskaly-dotnet-sdk --version 1.1.0-r1`
 
 ### Client
 
@@ -61,15 +61,15 @@ namespace Demo
     static class Demo
     {
         // create your own API key and secret at https://dashboard.fiskaly.com
-        public static String ApiKey = Environment.GetEnvironmentVariable("API_KEY");
-        public static String ApiSecret = Environment.GetEnvironmentVariable("API_SECRET");
+        public static String FiskalyApiKey = Environment.GetEnvironmentVariable("API_KEY");
+        public static String FiskalyApiSecret = Environment.GetEnvironmentVariable("API_SECRET");
 
         public static string TSS_ID = Guid.NewGuid().ToString();
         public static string CLIENT_ID = Guid.NewGuid().ToString();
 
 
         public static FiskalyHttpClient client =
-            new FiskalyHttpClient(ApiKey, ApiSecret, "https://kassensichv.io/api/v1");
+            new FiskalyHttpClient(FiskalyApiKey, FiskalyApiSecret, "https://kassensichv.io/api/v1");
 
         public static void Main(string[] args)
         {
