@@ -4,7 +4,6 @@ The fiskaly SDK includes an HTTP client that is needed<sup>[1](#fn1)</sup> for a
 
 ## Supported Versions
 
-* .NET Framework 2.0+ (legacy version - `SDK.legacy.csproj`)
 * .NET Standard 2.0+ (and therefore also .NET Framework 4.6.1+)
 * .NET Framework 4.0
 
@@ -24,11 +23,11 @@ The .NET SDK is available for download on [NuGet](https://www.nuget.org/packages
 
 #### Package Manager
 
-`PM> Install-Package fiskaly-dotnet-sdk -Version 1.0.0.1-alpha`
+`PM> Install-Package fiskaly-dotnet-sdk -Version 1.1.0-r1`
 
 #### .NET (dotnet) CLI
 
-`$ dotnet add package fiskaly-dotnet-sdk --version 1.0.0.1-alpha`
+`$ dotnet add package fiskaly-dotnet-sdk --version 1.1.0-r1`
 
 ### Client
 
@@ -59,19 +58,79 @@ using Fiskaly.Client.Models;
 
 namespace Demo
 {
-    class Demo
+    static class Demo
     {
-        static String ApiKey = Environment.GetEnvironmentVariable("API_KEY"); // create your own API key and secret at https://dashboard.fiskaly.com
-        static String ApiSecret = Environment.GetEnvironmentVariable("API_SECRET");
-        static FiskalyHttpClient client = new FiskalyHttpClient(ApiKey, ApiSecret, "https://kassensichv.io/api/v0");
+        // create your own API key and secret at https://dashboard.fiskaly.com
+        public static String FiskalyApiKey = Environment.GetEnvironmentVariable("API_KEY");
+        public static String FiskalyApiSecret = Environment.GetEnvironmentVariable("API_SECRET");
 
-        static void Main(string[] args)
+        public static string TSS_ID = Guid.NewGuid().ToString();
+        public static string CLIENT_ID = Guid.NewGuid().ToString();
+
+
+        public static FiskalyHttpClient client =
+            new FiskalyHttpClient(FiskalyApiKey, FiskalyApiSecret, "https://kassensichv.io/api/v1");
+
+        public static void Main(string[] args)
         {
-            FiskalyHttpResponse result = client.Request("GET", "tss", null, null, null);
-            Console.WriteLine(result.Status);
-            Console.WriteLine(result.Reason);
-            Console.WriteLine(result.Headers);
-            Console.WriteLine(Encoding.UTF8.GetString(result.Body));
+            InitializeTss();
+
+            var startTxResponse = StartTransaction();
+        }
+
+        public static void CreateClient()
+        {
+            var clientSerial = "fiskaly-dotnet-sdk-test-client";
+            var createTssPayload = "{ \"serial_number\": \"" + clientSerial + "\" }";
+            var bodyBytes = Encoding.UTF8.GetBytes(createTssPayload);
+
+            var response = client
+                .Request("PUT", "/tss/" + TSS_ID + "/client/" + CLIENT_ID, bodyBytes, null, null);
+            var decodedBody = Encoding.UTF8.GetString(response.Body);
+            var body = JsonConvert
+                .DeserializeObject<Dictionary<string, object>>(decodedBody);
+        }
+
+        public static void CreateTss()
+        {
+            var descriptionContent = "TSS created by .NET SDK CreateClient at "
+                + DateTime.Now.ToString();
+            var createClientPayload = "{ \"description\": \""
+                + descriptionContent + "\", \"state\": \"UNINITIALIZED\" }";
+
+            var bodyBytes = Encoding.UTF8.GetBytes(createClientPayload);
+
+            var response = client
+                .Request("PUT", "/tss/" + TSS_ID, bodyBytes, null, null);
+
+            var decodedBody = Encoding.UTF8.GetString(response.Body);
+            var body = JsonConvert
+                .DeserializeObject<Dictionary<string, object>>(decodedBody);
+
+            var initializeTssPayload = "{ \"state\": \"INITIALIZED\" }";
+            bodyBytes = Encoding.UTF8.GetBytes(initializeTssPayload);
+
+            var initializeResponse = client
+                .Request("PUT", "/tss/" + TSS_ID, bodyBytes, null, null);
+        }
+
+        public static void InitializeTss()
+        {
+            CreateTss();
+            CreateClient();
+        }
+
+        public static FiskalyHttpResponse StartTransaction()
+        {
+            var txId = Guid.NewGuid().ToString();
+            var payload = "{ \"state\": \"ACTIVE\", \"client_id\": \"" + CLIENT_ID + "\" }";
+
+            var bodyBytes = Encoding.UTF8.GetBytes(payload);
+
+            var response = client
+                .Request("PUT", "/tss/" + TSS_ID + "/tx/" + txId, bodyBytes, null, null);
+
+            return response;
         }
     }
 }
