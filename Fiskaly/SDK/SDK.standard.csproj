@@ -16,8 +16,8 @@
     <EnableDefaultCompileItems>true</EnableDefaultCompileItems>
     <Authors>Benjamin Auinger</Authors>
     <Company>fiskaly GmbH</Company>
-    <VersionPrefix>1.1.0</VersionPrefix>
-    <VersionSuffix>alpha</VersionSuffix>
+    <VersionPrefix>1.1.0-r1</VersionPrefix>
+    <VersionSuffix>-alpha</VersionSuffix>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
@@ -53,7 +53,7 @@
     <Authors>benjamin.fiskaly,fiskaly</Authors>
     <PackageDescription>This package contains the fiskaly .NET SDK which should be used to work with our services.</PackageDescription>
     <Copyright>fiskaly GmbH</Copyright>
-    <PackageReleaseNotes>v1.1.0-alpha - add ConfigureClient, Version and synchronize with fiskaly Client v1.1.0 changes</PackageReleaseNotes>
+    <PackageReleaseNotes>v1.1.0-r1-alpha - add ConfigureClient, Version and synchronize with fiskaly Client v1.1.0 changes</PackageReleaseNotes>
     <PackageTags>fiskaly dotnet-sdk fiskaly-dotnet-sdk kassensichv</PackageTags>
     <RepositoryType>GitHub</RepositoryType>
     <RepositoryUrl>https://github.com/fiskaly/fiskaly-sdk-dotnet</RepositoryUrl>
