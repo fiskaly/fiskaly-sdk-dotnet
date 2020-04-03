@@ -6,14 +6,10 @@ namespace Fiskaly.Client.Models
 {
     public class Transformer
     {
-        public static byte[] EncodeHttpBody(byte[] bodyBytes)
-        {
-            return Encoding.UTF8.GetBytes(Convert.ToBase64String(bodyBytes));
-        }
-
         public static byte[] EncodeJsonRpcRequest(JsonRpcRequest request)
         {
             string payload = JsonConvert.SerializeObject(request);
+            System.Diagnostics.Debug.WriteLine("Sending payload: " + payload);
             return Encoding.UTF8.GetBytes(payload);
         }
 

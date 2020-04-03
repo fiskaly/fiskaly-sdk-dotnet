@@ -10,7 +10,7 @@ using System.Text;
 namespace Fiskaly.Client.Tests
 {
     [TestClass]
-    public class AbstractClientTests
+    public class ClientTests
     {
         private AbstractClient GetClientInstance()
         {
@@ -22,7 +22,7 @@ namespace Fiskaly.Client.Tests
             return new LinuxClient();
         }
 
-        [TestMethod]
+        [TestMethod()]
         public void TestCStringConversion()
         {
             AbstractClient client = GetClientInstance();
@@ -32,34 +32,51 @@ namespace Fiskaly.Client.Tests
 
             JsonRpcRequest request = new JsonRpcRequest
             {
-                Id = DateTime.Now.ToString(),
+                RequestId = DateTime.Now.ToString(),
                 JsonRpc = "2.0",
                 Method = "echo",
                 Params = new RequestParams
                 {
-                    Body = encodedInput,
+                    Request = new Request
+                    {
+                        Body = encodedInput,
+                        Headers = new Dictionary<string, string>(),
+                        Method = "PUT",
+                        Path = "/tx",
+                        Query = new Dictionary<string, string>()
+                    },
                     Context = "",
-                    Headers = new Dictionary<string, string>(),
-                    Method = "PUT",
-                    Path = "/tx",
-                    Query = new Dictionary<string, string>()
                 }
             };
 
             byte[] encodedPayload = Transformer.EncodeJsonRpcRequest(request);
-            string payload = Encoding.UTF8.GetString(encodedPayload);
-
-            Debug.WriteLine(payload);
-
             string result = client.Invoke(encodedPayload);
+
             Debug.WriteLine(result);
 
-            JsonRpcResponse<RequestResult> deserializedResponse =
-                JsonConvert.DeserializeObject<JsonRpcResponse<RequestResult>>(result);
+            JsonRpcResponse<RequestParams> deserializedResponse =
+                JsonConvert.DeserializeObject<JsonRpcResponse<RequestParams>>(result);
 
-            string decodedInput = Transformer.DecodeBase64Body(deserializedResponse.Result.Body);
+            Debug.WriteLine(deserializedResponse);
+
+            string decodedInput = Transformer.DecodeBase64Body(deserializedResponse.Result.Request.Body);
 
             Assert.AreEqual(input, decodedInput);
+        }
+
+        [TestMethod()]
+        public void FaultyStringShouldCauseError()
+        {
+            AbstractClient client = GetClientInstance();
+
+            string faultyString = "faulty test";
+            byte[] encoded = Encoding.UTF8.GetBytes(faultyString);
+
+            encoded[1] = 0xFE;
+
+            string invocation = client.Invoke(encoded);
+
+            Assert.IsTrue(invocation.Contains("encoding error"));
         }
     }
 }

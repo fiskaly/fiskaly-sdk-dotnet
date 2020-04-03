@@ -5,8 +5,11 @@ namespace Fiskaly.Client
 {
     public class WindowsClient : AbstractClient
     {
-        private const string LIB_64 = "com.fiskaly.kassensichv.client-windows-amd64.dll";
-        private const string LIB_32 = "com.fiskaly.kassensichv.client-windows-386.dll";
+        private const string PLATFORM = "windows";
+        private const string EXTENSION = ".dll";
+
+        private const string LIB_64 = LIB_PREFIX + "-" + PLATFORM + "-amd64-" + CLIENT_VERSION + EXTENSION;
+        private const string LIB_32 = LIB_PREFIX + "-" + PLATFORM + "-386-" + CLIENT_VERSION + EXTENSION;
 
         [DllImport(LIB_32, EntryPoint = SYMBOL_FREE)]
         internal static extern void Free32(IntPtr response);

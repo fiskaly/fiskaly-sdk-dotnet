@@ -1,22 +1,22 @@
-﻿using System.Diagnostics;
-using System.Text;
-
-namespace Fiskaly.Client.Models
+﻿namespace Fiskaly.Client.Models
 {
-    public class PayloadFactory
+    public static class PayloadFactory
     {
+        private const string JSON_RPC_VERSION = "2.0";
+
         public static byte[] BuildCreateContextPayload(string id, string apiKey, string apiSecret, string baseUrl)
         {
             JsonRpcRequest request = new JsonRpcRequest
             {
-                Id = id,
-                JsonRpc = "2.0",
+                RequestId = id,
+                JsonRpc = JSON_RPC_VERSION,
                 Method = "create-context",
                 Params = new CreateContextParams
                 {
                     ApiKey = apiKey,
                     ApiSecret = apiSecret,
-                    BaseUrl = baseUrl
+                    BaseUrl = baseUrl,
+                    SdkVersion = Constants.SDK_VERSION
                 }
             };
 
@@ -25,16 +25,38 @@ namespace Fiskaly.Client.Models
 
         public static byte[] BuildRequestPayload(string id, RequestParams paramsValue)
         {
-            Debug.WriteLine(Encoding.UTF8.GetString(paramsValue.Body));
-
-            paramsValue.Body = Transformer.EncodeHttpBody(paramsValue.Body);
-
             JsonRpcRequest request = new JsonRpcRequest
             {
-                Id = id,
-                JsonRpc = "2.0",
+                RequestId = id,
+                JsonRpc = JSON_RPC_VERSION,
                 Method = "request",
                 Params = paramsValue
+            };
+
+            return Transformer.EncodeJsonRpcRequest(request);
+        }
+
+        public static byte[] BuildClientConfigurationPayload(string id, ConfigParams configParams)
+        {
+            JsonRpcRequest request = new JsonRpcRequest
+            {
+                RequestId = id,
+                JsonRpc = JSON_RPC_VERSION,
+                Method = "config",
+                Params = configParams
+            };
+
+            return Transformer.EncodeJsonRpcRequest(request);
+        }
+
+        public static byte[] BuildGetVersionPayload(string id)
+        {
+            JsonRpcRequest request = new JsonRpcRequest
+            {
+                RequestId = id,
+                JsonRpc = JSON_RPC_VERSION,
+                Method = "version",
+                Params = new JsonRpcParams { },
             };
 
             return Transformer.EncodeJsonRpcRequest(request);

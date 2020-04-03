@@ -9,15 +9,15 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net40</TargetFrameworks>
     <OutputType>Library</OutputType>
-    <RootNamespace>FiskalyClient</RootNamespace>
+    <RootNamespace>Fiskaly</RootNamespace>
     <AssemblyName>fiskaly-dotnet-sdk</AssemblyName>
-    <AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <AssemblyVersion>1.1.0-alpha</AssemblyVersion>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <EnableDefaultCompileItems>true</EnableDefaultCompileItems>
     <Authors>Benjamin Auinger</Authors>
     <Company>fiskaly GmbH</Company>
-    <VersionPrefix>1.0.0.1</VersionPrefix>
-    <VersionSuffix>alpha</VersionSuffix>
+    <VersionPrefix>1.1.0-r1</VersionPrefix>
+    <VersionSuffix>-alpha</VersionSuffix>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
@@ -37,16 +37,6 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
-  <!-- Client -->
-  <!-- ItemGroup>
-    <Content Include="$(SharedLibrariesDirectory)\$(ClientPrefix)-linux-386.so">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="$(SharedLibrariesDirectory)\$(ClientPrefix)-linux-amd64.so">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup -->
-
   <!-- Dependencies -->
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
@@ -63,7 +53,7 @@
     <Authors>benjamin.fiskaly,fiskaly</Authors>
     <PackageDescription>This package contains the fiskaly .NET SDK which should be used to work with our services.</PackageDescription>
     <Copyright>fiskaly GmbH</Copyright>
-    <PackageReleaseNotes>v1.0.0.1 - add .NET Standard 2.0+ and .NET Framework 4.0+ support.</PackageReleaseNotes>
+    <PackageReleaseNotes>v1.1.0-r1-alpha - add ConfigureClient, Version and synchronize with fiskaly Client v1.1.0 changes</PackageReleaseNotes>
     <PackageTags>fiskaly dotnet-sdk fiskaly-dotnet-sdk kassensichv</PackageTags>
     <RepositoryType>GitHub</RepositoryType>
     <RepositoryUrl>https://github.com/fiskaly/fiskaly-sdk-dotnet</RepositoryUrl>
