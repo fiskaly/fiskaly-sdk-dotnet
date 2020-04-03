@@ -20,15 +20,15 @@ The fiskaly SDK includes an HTTP client that is needed<sup>[1](#fn1)</sup> for a
 ### NuGet
 ![Nuget](https://img.shields.io/nuget/dt/fiskaly-dotnet-sdk)
 
-The .NET SDK is available for download on [NuGet](https://www.nuget.org/packages/fiskaly-dotnet-sdk/1.1.0-r1).
+The .NET SDK is available for download on [NuGet](https://www.nuget.org/packages/fiskaly-dotnet-sdk/1.1.0-alpha+2).
 
 #### Package Manager
 
-`PM> Install-Package fiskaly-dotnet-sdk -Version 1.1.0-r1`
+`PM> Install-Package fiskaly-dotnet-sdk -Version 1.1.0-alpha+2`
 
 #### .NET (dotnet) CLI
 
-`$ dotnet add package fiskaly-dotnet-sdk --version 1.1.0-r1`
+`$ dotnet add package fiskaly-dotnet-sdk --version 1.1.0-alpha+2`
 
 ### Client
 
