@@ -11,13 +11,13 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Fiskaly</RootNamespace>
     <AssemblyName>fiskaly-dotnet-sdk</AssemblyName>
-    <AssemblyVersion>1.1.0-alpha</AssemblyVersion>
+    <AssemblyVersion>1.1.0-r1</AssemblyVersion>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <EnableDefaultCompileItems>true</EnableDefaultCompileItems>
     <Authors>Benjamin Auinger</Authors>
     <Company>fiskaly GmbH</Company>
-    <VersionPrefix>1.1.0-r1</VersionPrefix>
-    <VersionSuffix>-alpha</VersionSuffix>
+    <VersionPrefix>1.1.0</VersionPrefix>
+    <VersionSuffix>r1</VersionSuffix>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
@@ -50,16 +50,16 @@
     <IsPackable>true</IsPackable>
     <PackageId>fiskaly-dotnet-sdk</PackageId>
     <Title>fiskaly .NET SDK</Title>
-    <Authors>benjamin.fiskaly,fiskaly</Authors>
+    <Authors>benjamin.fiskaly;fiskaly</Authors>
     <PackageDescription>This package contains the fiskaly .NET SDK which should be used to work with our services.</PackageDescription>
     <Copyright>fiskaly GmbH</Copyright>
-    <PackageReleaseNotes>v1.1.0-r1-alpha - add ConfigureClient, Version and synchronize with fiskaly Client v1.1.0 changes</PackageReleaseNotes>
-    <PackageTags>fiskaly dotnet-sdk fiskaly-dotnet-sdk kassensichv</PackageTags>
+    <PackageReleaseNotes>v1.1.0-r1 -  synchronize with fiskaly Client v1.1.0 changes</PackageReleaseNotes>
+    <PackageTags>fiskaly dotnet-sdk fiskaly-dotnet-sdk kassensichv tse cloud-tse</PackageTags>
     <RepositoryType>GitHub</RepositoryType>
     <RepositoryUrl>https://github.com/fiskaly/fiskaly-sdk-dotnet</RepositoryUrl>
     <RepositoryBranch>master</RepositoryBranch>
     <ProjectUrl>https://developer.fiskaly.com/api/kassensichv/</ProjectUrl>
-    <Summary>fiskaly .NET Core SDK</Summary>
+    <Summary>fiskaly .NET SDK</Summary>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 </Project>
