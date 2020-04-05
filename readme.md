@@ -20,7 +20,7 @@ The fiskaly SDK includes an HTTP client that is needed<sup>[1](#fn1)</sup> for a
 ### NuGet
 ![Nuget](https://img.shields.io/nuget/dt/fiskaly-dotnet-sdk)
 
-The .NET SDK is available for download on [NuGet](https://www.nuget.org/packages/fiskaly-dotnet-sdk/1.1.0-alpha+2).
+The .NET SDK is available for download on [NuGet](https://www.nuget.org/packages/fiskaly-dotnet-sdk/1.1.0-alpha+2) which is the recommended way of integrating the SDK into your project.
 
 #### Package Manager
 
@@ -49,6 +49,8 @@ If you are using and older version than the earliest supported version, there is
 `[Fiskaly/SDK]$ dotnet build SDK.legacy.csproj`
 
 ## Usage
+
+### Demo
 
 ```c#
 using System;
@@ -134,6 +136,35 @@ namespace Demo
             return response;
         }
     }
+}
+```
+
+### Client Configuration
+
+The SDK is built on the [fiskaly Client](https://developer.fiskaly.com/en/docs/client-documentation) which can be [configured](https://developer.fiskaly.com/en/docs/client-documentation#configuration) through the SDK.
+
+A reason why you would do this, is to enable the [debug mode](https://developer.fiskaly.com/en/docs/client-documentation#debug-mode).
+
+#### Enabling the debug mode
+
+The following code snippet demonstrates how to enable the debug mode in the client.
+
+```c#
+
+public static void Main(string[] args)
+{
+    var client = new FiskalyHttpClient(
+        FiskalyApiKey,
+        FiskalyApiSecret,
+        "https://kassensichv.io/api/v1"
+    );
+
+    var configuration = new ClientConfiguration
+    {
+        DebugLevel = DebugLevel.EVERYTHING
+    };
+
+    client.ConfigureClient(configuration);
 }
 ```
 
