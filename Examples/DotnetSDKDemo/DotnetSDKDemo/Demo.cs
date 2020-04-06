@@ -20,6 +20,18 @@ namespace DotnetSDKDemo
 
         public static void Main(string[] args)
         {
+            if (API_KEY == null)
+            {
+                Console.Error.WriteLine("Please provide an API-Key!");
+                return;
+            }
+
+            if (API_SECRET == null)
+            {
+                Console.Error.WriteLine("Please provide an API-Secret!");
+                return;
+            }
+
             Console.WriteLine("Using API-Key: \"" + API_KEY + "\"");
             Console.WriteLine("Using API-Key: \"" + API_SECRET + "\"");
 
