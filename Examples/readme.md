@@ -12,7 +12,7 @@ The project can either be built using Visual Studio or using the `dotnet` CLI.
 
 This will produce an exe file which can be run to test compatibility with your target system.
 
-Don't forget to download the [fiskaly Client](https://developer.fiskaly.com/downloads) and place it within the execution directory.
+**Don't forget to download the** [fiskaly Client](https://developer.fiskaly.com/downloads) and place it within the execution directory.
 
 ## Runtime configuration
 
