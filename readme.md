@@ -50,6 +50,8 @@ If you are using and older version than the earliest supported version, there is
 
 ## Usage
 
+### Demo
+
 ```c#
 using System;
 using System.Text;
@@ -134,6 +136,35 @@ namespace Demo
             return response;
         }
     }
+}
+```
+
+### Client Configuration
+
+The SDK is built on the [fiskaly Client](https://developer.fiskaly.com/en/docs/client-documentation) which can be [configured](https://developer.fiskaly.com/en/docs/client-documentation#configuration) through the SDK.
+
+A reason why you would do this, is to enable the [debug mode](https://developer.fiskaly.com/en/docs/client-documentation#debug-mode).
+
+#### Enabling the debug mode
+
+The following code snippet demonstrates how to enable the debug mode in the client.
+
+```c#
+
+public static void Main(string[] args)
+{
+    var client = new FiskalyHttpClient(
+        FiskalyApiKey,
+        FiskalyApiSecret,
+        "https://kassensichv.io/api/v1"
+    );
+
+    var configuration = new ClientConfiguration
+    {
+        DebugLevel = DebugLevel.EVERYTHING
+    };
+
+    client.ConfigureClient(configuration);
 }
 ```
 
