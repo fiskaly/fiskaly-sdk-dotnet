@@ -57,7 +57,11 @@ namespace Fiskaly
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
-                Client = new LinuxClient();
+                #if Android
+                    Client = new AndroidClient();
+                #else
+                    Client = new LinuxClient();
+                #endif
             }
             else
             {
