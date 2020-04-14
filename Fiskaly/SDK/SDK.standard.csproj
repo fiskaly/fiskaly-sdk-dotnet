@@ -11,12 +11,12 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Fiskaly</RootNamespace>
     <AssemblyName>fiskaly-dotnet-sdk</AssemblyName>
-    <AssemblyVersion>1.1.100</AssemblyVersion>
+    <AssemblyVersion>1.1.200</AssemblyVersion>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <EnableDefaultCompileItems>true</EnableDefaultCompileItems>
     <Authors>Benjamin Auinger</Authors>
     <Company>fiskaly GmbH</Company>
-    <VersionPrefix>1.1.100</VersionPrefix>
+    <VersionPrefix>1.1.200</VersionPrefix>
     <VersionSuffix></VersionSuffix>
   </PropertyGroup>
 
@@ -53,7 +53,7 @@
     <Authors>benjamin.fiskaly;fiskaly</Authors>
     <PackageDescription>This package contains the fiskaly .NET SDK which should be used to work with our services.</PackageDescription>
     <Copyright>fiskaly GmbH</Copyright>
-    <PackageReleaseNotes>v1.1.100 - Update client</PackageReleaseNotes>
+    <PackageReleaseNotes>v1.1.200 - Fix proxy issues</PackageReleaseNotes>
     <PackageTags>fiskaly dotnet-sdk fiskaly-dotnet-sdk kassensichv tse cloud-tse</PackageTags>
     <RepositoryType>GitHub</RepositoryType>
     <RepositoryUrl>https://github.com/fiskaly/fiskaly-sdk-dotnet</RepositoryUrl>
