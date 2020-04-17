@@ -11,16 +11,16 @@ namespace Fiskaly.Client
         private const string LIB_64 = LIB_PREFIX + "-" + PLATFORM + "-amd64-" + CLIENT_VERSION + EXTENSION;
         private const string LIB_32 = LIB_PREFIX + "-" + PLATFORM + "-386-" + CLIENT_VERSION + EXTENSION;
 
-        [DllImport(LIB_32, EntryPoint = SYMBOL_FREE)]
+        [DllImport(LIB_32, EntryPoint = SYMBOL_FREE, CallingConvention = CallingConvention.Cdecl)]
         internal static extern void Free32(IntPtr response);
 
-        [DllImport(LIB_64, EntryPoint = SYMBOL_FREE)]
+        [DllImport(LIB_64, EntryPoint = SYMBOL_FREE, CallingConvention = CallingConvention.Cdecl)]
         internal static extern void Free64(IntPtr response);
 
-        [DllImport(LIB_32, EntryPoint = SYMBOL_INVOKE)]
+        [DllImport(LIB_32, EntryPoint = SYMBOL_INVOKE, CallingConvention = CallingConvention.Cdecl)]
         internal static extern IntPtr Invoke32([In] byte[] request);
 
-        [DllImport(LIB_64, EntryPoint = SYMBOL_INVOKE)]
+        [DllImport(LIB_64, EntryPoint = SYMBOL_INVOKE, CallingConvention = CallingConvention.Cdecl)]
         internal static extern IntPtr Invoke64([In] byte[] request);
 
         protected override IntPtr PerformInvokeForArchitecure(byte[] request)
