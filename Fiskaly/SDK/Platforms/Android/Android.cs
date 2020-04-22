@@ -12,7 +12,7 @@ namespace Fiskaly.Client
         internal static extern void Free(IntPtr response);
 
         [DllImport(LIB, EntryPoint = SYMBOL_INVOKE)]
-        internal static extern IntPtr Invoke([In] byte[] request);
+        internal static extern IntPtr InvokeLib([In] byte[] request);
 
         protected override void PerformFreeForArchitecture(IntPtr allocatedMemory)
         {
@@ -21,7 +21,7 @@ namespace Fiskaly.Client
 
         protected override IntPtr PerformInvokeForArchitecure(byte[] request)
         {
-            return Invoke(request);
+            return InvokeLib(request);
         }
     }
 }
