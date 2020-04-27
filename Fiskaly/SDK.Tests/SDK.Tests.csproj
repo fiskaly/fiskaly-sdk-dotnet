@@ -15,6 +15,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SDK\SDK.standard.csproj" />
+    <Reference Include="fiskaly-sdk-dotnet">
+      <HintPath>bin\Release\netcoreapp3.1\fiskaly-dotnet-sdk.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
