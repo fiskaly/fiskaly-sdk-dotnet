@@ -41,13 +41,13 @@ jobs:
         path: Fiskaly/SDK.Tests/bin/Release/netcoreapp3.1/fiskaly-dotnet-sdk.dll
 
 
-    - name: Run SDK Unit-Tests
+    - name: Download Client
       shell: pwsh
-      run: |
-        cd Fiskaly/SDK.Tests &&
-        wget https://storage.googleapis.com/download/storage/v1/b/fiskaly-cdn/o/clients%2Fcom.fiskaly.client-windows-amd64-v1.1.400.dll?generation=1587652227126443&alt=media &&
-        copy com.fiskaly.client-windows-amd64-v1.1.400.dll bin/Release/netcoreapp.3.1/ &&
-        dotnet test --configuration Release Fiskaly/SDK.Tests/SDK.Tests.csproj
+      run: wget https://storage.googleapis.com/download/storage/v1/b/fiskaly-cdn/o/clients%2Fcom.fiskaly.client-windows-amd64-v1.1.400.dll?generation=1587652227126443&alt=media > bin/Release/netcoreapp.3.1/com.fiskaly.client-windows-amd64-v1.1.400.dll
+
+    - name: Run Unit Tests
+      shell: pwsh
+      run: dotnet test --configuration Release Fiskaly/SDK.Tests/SDK.Tests.csproj
 
   test-linux:
     needs: build
