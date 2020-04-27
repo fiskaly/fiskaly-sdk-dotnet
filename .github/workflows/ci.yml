@@ -19,18 +19,44 @@ jobs:
     - name: Build fiskaly .NET SDK
       run: dotnet build --configuration Release --no-restore Fiskaly/SDK/SDK.standard.csproj
 
-  test:
+    - uses: actions/upload-artifact@master
+      with:
+        name: fiskaly-dotnet-sdk-net40
+        path: Fiskaly/SDK/bin/Release/net40/fiskaly-dotnet-sdk.dll
+
+    - uses: actions/upload-artifact@master
+      with:
+        name: fiskaly-dotnet-sdk-netstandard2.0
+        path: Fiskaly/SDK/bin/Release/netstandard2.0/fiskaly-dotnet-sdk.dll
+
+  test-windows:
     needs: build
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: nuget/setup-nuget@v1
+
+    - uses: actions/download-artifact@master
+      with:
+        name: fiskaly-dotnet-sdk-net40
+        path: Fiskaly/SDK.Tests/bin/Release/netcoreapp3.1/fiskaly-dotnet-sdk.dll
+
 
     - name: Run SDK Unit-Tests
       shell: pwsh
       run: |
-        cd Fiskaly/SDK.Tests
-        wget https://storage.googleapis.com/download/storage/v1/b/fiskaly-cdn/o/clients%2Fcom.fiskaly.client-windows-amd64-v1.1.400.dll?generation=1587652227126443&alt=media
-        copy com.fiskaly.client-windows-amd64-v1.1.400.dll bin/Release/netcoreapp.3.1/
-        dotnet test --configuration Release Fiskaly/SDK.Tests/SDK.Tests.csproj
+        cd Fiskaly/SDK.Tests &&
+        wget https://storage.googleapis.com/download/storage/v1/b/fiskaly-cdn/o/clients%2Fcom.fiskaly.client-windows-amd64-v1.1.400.dll?generation=1587652227126443&alt=media &&
+        copy com.fiskaly.client-windows-amd64-v1.1.400.dll bin/Release/netcoreapp.3.1/ &&
+        dotnet test --configuration Release Fiskaly/SDK.Tests/SDK.Tests.csproj &&
+
+  test-linux:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: actions/download-artifact@master
+      with:
+        name: fiskaly-dotnet-sdk-netstandard2.0
+        path: Fiskaly/SDK/bin/Release/netstandard2.0/fiskaly-dotnet-sdk.dll
 
