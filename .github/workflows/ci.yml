@@ -11,6 +11,7 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
+    - uses: nuget/setup-nuget@v1
 
     - name: Setup msbuild
       uses: microsoft/setup-msbuild@v1.0.0
@@ -18,7 +19,6 @@ jobs:
         vs-version: [16.4, 16.5]
 
     - name: Install dependencies
-      uses: nuget/setup-nuget@v1
       run: nuget restore Fiskaly/SDK/SDK.standard.csproj
 
     - name: Build
