@@ -20,6 +20,7 @@ jobs:
       run: dotnet build --configuration Release --no-restore Fiskaly/SDK/SDK.standard.csproj
 
   test:
+    needs: build
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
@@ -31,5 +32,5 @@ jobs:
         cd Fiskaly/SDK.Tests
         wget https://storage.googleapis.com/download/storage/v1/b/fiskaly-cdn/o/clients%2Fcom.fiskaly.client-windows-amd64-v1.1.400.dll?generation=1587652227126443&alt=media
         copy com.fiskaly.client-windows-amd64-v1.1.400.dll bin/Release/netcoreapp.3.1/
-        dotnet test Fiskaly/SDK.Tests/SDK.Tests.csproj
+        dotnet test --configuration Release Fiskaly/SDK.Tests/SDK.Tests.csproj
 
