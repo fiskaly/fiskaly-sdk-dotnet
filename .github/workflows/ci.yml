@@ -17,8 +17,8 @@ jobs:
       with:
         vs-version: [16.4, 16.5]
 
-    - uses: nuget/setup-nuget@v1
     - name: Install dependencies
+      uses: nuget/setup-nuget@v1
       run: nuget restore Fiskaly/SDK/SDK.standard.csproj
 
     - name: Build
