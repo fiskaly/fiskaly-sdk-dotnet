@@ -22,4 +22,4 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore Fiskaly/SDK/SDK.standard.csproj
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test --no-restore --verbosity normal Fiskaly/SDK.Tests/SDK.Tests.csproj
