@@ -15,8 +15,6 @@ jobs:
 
     - name: Setup msbuild
       uses: microsoft/setup-msbuild@v1.0.0
-      with:
-        vs-version: [16.4, 16.5]
 
     - name: Install dependencies
       run: nuget restore Fiskaly/SDK/SDK.standard.csproj
