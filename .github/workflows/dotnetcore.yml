@@ -8,15 +8,19 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
+
+    - name: Setup msbuild
+      uses: microsoft/setup-msbuild@v1.0.0
       with:
-        dotnet-version: 3.1.101
+        vs-version: [16.4]
+
+    - uses: nuget/setup-nuget@v1
     - name: Install dependencies
-      run: dotnet restore Fiskaly/SDK/SDK.standard.csproj
+      run: nuget restore Fiskaly/SDK/SDK.standard.csproj
+
     - name: Build
       run: dotnet build --configuration Release --no-restore Fiskaly/SDK/SDK.standard.csproj
     - name: Test
