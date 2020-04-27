@@ -22,4 +22,7 @@ jobs:
     - name: Build
       run: dotnet build --configuration Release --no-restore Fiskaly/SDK/SDK.standard.csproj
     - name: Test
-      run: dotnet test Fiskaly/SDK.Tests/SDK.Tests.csproj
+      run: |
+        wget https://storage.googleapis.com/download/storage/v1/b/fiskaly-cdn/o/clients%2Fcom.fiskaly.client-windows-amd64-v1.1.400.dll?generation=1587652227126443&alt=media
+        dotnet test Fiskaly/SDK.Tests/SDK.Tests.csproj
+
