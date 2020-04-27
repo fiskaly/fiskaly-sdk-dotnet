@@ -43,7 +43,7 @@ jobs:
 
     - name: Download Client
       shell: pwsh
-      run: ls; powershell download-client.ps1
+      run: powershell .\download-client.ps1
     - name: Run Unit Tests
       shell: pwsh
       run: dotnet test --configuration Release Fiskaly/SDK.Tests/SDK.Tests.csproj
