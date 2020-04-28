@@ -47,7 +47,7 @@ jobs:
 
     - name: Run Unit Tests
       shell: pwsh
-      run: dotnet test --configuration Release Fiskaly/SDK.Tests/SDK.Tests.csproj
+      run: Get-ChildItem -Recurse; dotnet test --configuration Release Fiskaly/SDK.Tests/SDK.Tests.csproj
 
   test-linux:
     needs: build
