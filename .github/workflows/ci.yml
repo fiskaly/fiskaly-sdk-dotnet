@@ -47,6 +47,9 @@ jobs:
 
     - name: Run Unit Tests
       shell: pwsh
+      env:
+        FISKALY_API_KEY: ${{ secrets.FISKAL_API_KEY }}
+        FISKALY_API_SECRET: ${{ secrets.FISKAL_API_SECRET }}
       run: Get-ChildItem -Recurse; dotnet test --configuration Release Fiskaly/SDK.Tests/SDK.Tests.csproj
 
   test-linux:
