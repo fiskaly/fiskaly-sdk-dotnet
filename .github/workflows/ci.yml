@@ -27,7 +27,7 @@ jobs:
     - uses: actions/upload-artifact@master
       with:
         name: fiskaly-dotnet-sdk-netstandard2.0
-        path: Fiskaly/SDK/bin/Release/netstandard2.0/fiskaly-dotnet-sdk.dll
+        path: Fiskaly/SDK/bin/Release/netstandard2.0
 
   test-windows:
     needs: build
@@ -38,7 +38,7 @@ jobs:
     - uses: actions/download-artifact@master
       with:
         name: fiskaly-dotnet-sdk-net40
-        path: Fiskaly/SDK.Tests/bin/Release/netcoreapp3.1/fiskaly-dotnet-sdk.dll
+        path: Fiskaly/SDK.Tests/bin/Release/netcoreapp3.1
 
 
     - name: Download Client
