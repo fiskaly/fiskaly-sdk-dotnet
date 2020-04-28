@@ -4,7 +4,7 @@ $outDir = "Fiskaly/SDK.Tests/bin/Release/netcoreapp.3.1"
 mkdir -p $outDir
 
 $outFile = "com.fiskaly.client-windows-amd64-v1.1.400.dll"
-$outPath = $outDir + $outFile
+$outPath = $outDir + "/" + $outFile
 
 $start_time = Get-Date
 echo "Starting Download at $start_time"
