@@ -35,7 +35,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Download client for Windows
+    - name: Download SDK DLL for Windows
       uses: actions/download-artifact@master
       with:
         name: fiskaly-dotnet-sdk-net40
@@ -69,15 +69,15 @@ jobs:
         dotnet-version: ${{ matrix.dotnet }}
 
     - uses: actions/download-artifact@master
-      name: Download client for Linux
+      name: Download SDK DLL for Linux
       with:
         name: fiskaly-dotnet-sdk-netstandard2.0
         path: Fiskaly/SDK.Tests/bin/Release/netcoreapp2.0
 
     - name: Run Unit Tests
-      shell: ls -R && bash
+      shell: bash
       env:
         FISKALY_API_KEY: ${{ secrets.FISKALY_API_KEY }}
         FISKALY_API_SECRET: ${{ secrets.FISKALY_API_SECRET }}
-      run: dotnet test --configuration Release Fiskaly/SDK.Tests/SDK.Tests.csproj
+      run: ls -R && dotnet test --configuration Release Fiskaly/SDK.Tests/SDK.Tests.csproj
 
