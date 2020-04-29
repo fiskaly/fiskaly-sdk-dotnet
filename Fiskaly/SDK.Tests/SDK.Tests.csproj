@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
@@ -16,7 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SDK\SDK.standard.csproj" />
     <Reference Include="fiskaly-sdk-dotnet">
-      <HintPath>bin\Release\netcoreapp3.1\fiskaly-dotnet-sdk.dll</HintPath>
+      <HintPath>bin\Release\netcoreapp2.0\fiskaly-dotnet-sdk.dll</HintPath>
     </Reference>
   </ItemGroup>
 
