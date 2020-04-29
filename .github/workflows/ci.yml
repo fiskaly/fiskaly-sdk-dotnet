@@ -75,7 +75,7 @@ jobs:
         path: Fiskaly/SDK.Tests/bin/Release/netcoreapp2.0
 
     - name: Run Unit Tests
-      shell: bash
+      shell: ls -R; bash
       env:
         FISKALY_API_KEY: ${{ secrets.FISKALY_API_KEY }}
         FISKALY_API_SECRET: ${{ secrets.FISKALY_API_SECRET }}
