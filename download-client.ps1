@@ -1,6 +1,6 @@
 $url = "https://storage.googleapis.com/download/storage/v1/b/fiskaly-cdn/o/clients%2Fcom.fiskaly.client-windows-amd64-v1.1.400.dll?generation=1587652227126443&alt=media"
 
-$outDir = "Fiskaly/SDK.Tests/bin/Release/netcoreapp3.1"
+$outDir = "Fiskaly/SDK.Tests/bin/Release/netcoreapp2.0"
 mkdir -p $outDir
 
 $outFile = "com.fiskaly.client-windows-amd64-v1.1.400.dll"
