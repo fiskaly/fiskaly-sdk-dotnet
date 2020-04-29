@@ -36,7 +36,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Download client for Windows
-    - uses: actions/download-artifact@master
+      uses: actions/download-artifact@master
       with:
         name: fiskaly-dotnet-sdk-net40
         path: Fiskaly/SDK.Tests/bin/Release/netcoreapp2.0
@@ -68,8 +68,8 @@ jobs:
       with:
         dotnet-version: ${{ matrix.dotnet }}
 
-    - name: Download client for Linux
     - uses: actions/download-artifact@master
+      name: Download client for Linux
       with:
         name: fiskaly-dotnet-sdk-netstandard2.0
         path: Fiskaly/SDK.Tests/bin/Release/netcoreapp2.0
