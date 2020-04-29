@@ -55,11 +55,27 @@ jobs:
   test-linux:
     needs: build
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dotnet: [ '2.2.103', '3.0.100', '3.1.100' ]
     steps:
     - uses: actions/checkout@v2
+
+    - uses: actions/setup-dotnet@v1
+    - name: Setup dotnet
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ matrix.dotnet }}
 
     - uses: actions/download-artifact@master
       with:
         name: fiskaly-dotnet-sdk-netstandard2.0
         path: Fiskaly/SDK/bin/Release/netstandard2.0/fiskaly-dotnet-sdk.dll
+
+    - name: Run Unit Tests
+      shell: bash
+      env:
+        FISKALY_API_KEY: ${{ secrets.FISKALY_API_KEY }}
+        FISKALY_API_SECRET: ${{ secrets.FISKALY_API_SECRET }}
+      run: dotnet test --configuration Release Fiskaly/SDK.Tests/SDK.Tests.csproj
 
