@@ -1,0 +1,21 @@
+{
+  "replace": {
+    "client_version": "1.1.500",
+    "sdk_version": "1.1.500"
+  },
+
+  "files": [
+    {
+      "input": "Fiskaly/SDK/Constants.cs.template",
+      "output": "Fiskaly/SDK/Constants.cs"
+    },
+    {
+      "input": "Fiskaly/SDK/SDK.standard.csproj.template",
+      "output": "Fiskaly/SDK/SDK.standard.csproj"
+    },
+    {
+      "input": "readme.md.template",
+      "output": "readme.md"
+    }
+  ]
+}

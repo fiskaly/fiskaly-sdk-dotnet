@@ -1,0 +1,8 @@
+﻿namespace Fiskaly
+{
+    static class Constants
+    {
+        public const string SDK_VERSION = "dotnet-v{{.SDK_VERSION}}";
+        public const string CLIENT_VERSION = "v{{.CLIENT_VERSION}}";
+    }
+}
