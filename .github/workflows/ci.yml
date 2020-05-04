@@ -68,6 +68,9 @@ jobs:
       with:
         dotnet-version: ${{ matrix.dotnet }}
 
+    - name: Install dependencies for Linux
+      run: dotnet restore Fiskaly/SDK/SDK.standard.csproj
+
     - uses: actions/download-artifact@master
       name: Download SDK DLL for Linux
       with:
