@@ -41,6 +41,8 @@ jobs:
         name: fiskaly-dotnet-sdk-net40
         path: Fiskaly/SDK.Tests/bin/Release/netcoreapp2.0
 
+    - name: Install dependencies for Windows
+      run: dotnet restore Fiskaly/SDK.Tests/SDK.Tests.csproj
 
     - name: Download Client
       shell: pwsh
@@ -69,7 +71,7 @@ jobs:
         dotnet-version: ${{ matrix.dotnet }}
 
     - name: Install dependencies for Linux
-      run: dotnet restore Fiskaly/SDK/SDK.standard.csproj
+      run: dotnet restore Fiskaly/SDK.Tests/SDK.Tests.csproj
 
     - uses: actions/download-artifact@master
       name: Download SDK DLL for Linux
