@@ -34,10 +34,10 @@ namespace Fiskaly.Errors
     {
         public int Status { get; private set; }
         public string Error { get; private set; }
-        public int Code { get; private set; }
+        public string Code { get; private set; }
         public string RequestId { get; private set; }
 
-        public FiskalyHttpError(int status, string error, string message, int code, string requestId) : base(message)
+        public FiskalyHttpError(int status, string error, string message, string code, string requestId) : base(message)
         {
             Status = status;
             Error = error;
