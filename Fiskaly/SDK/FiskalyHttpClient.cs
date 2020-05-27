@@ -125,7 +125,7 @@ namespace Fiskaly
             errorData
                 .Response
                 .Headers
-                .TryGetValue("X-Request-Id", out requestIdHeaders);
+                .TryGetValue("x-request-id", out requestIdHeaders);
 
             string requestId = requestIdHeaders[0];
 
