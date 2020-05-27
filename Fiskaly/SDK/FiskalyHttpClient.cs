@@ -133,7 +133,7 @@ namespace Fiskaly
                 response.Error.Code,
                 errorBody.Error,
                 errorBody.Message,
-                errorData.Response.Status,
+                errorBody.Code,
                 requestId
             );
         }
