@@ -15,8 +15,9 @@ namespace Fiskaly.Client
     {
         public DebugLevel DebugLevel { get; set; }
         public string DebugFile { get; set; }
-        public int ClientTimeout { get;set; }
+        public int ClientTimeout { get; set; }
         public int SmaersTimeout { get; set; }
+        public string HttpProxy { get; set; }
     }
 
     public abstract class AbstractClient

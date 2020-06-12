@@ -84,5 +84,14 @@ namespace Fiskaly.Client.Models
 
         [JsonProperty("smaers_timeout")]
         public int SmaersTimeout { get; set; }
+
+        [JsonProperty("http_proxy")]
+        public string HttpProxy { get; set; }
+    }
+
+    public class HealthStatusRequestParams : JsonRpcParams
+    {
+        [JsonProperty("context")]
+        public string Context { get; set; }
     }
 }

@@ -61,5 +61,18 @@
 
             return Transformer.EncodeJsonRpcRequest(request);
         }
+
+        public static byte[] BuildHealthCheckPayload(string id, HealthStatusRequestParams healthStatusRequestParams)
+        {
+            JsonRpcRequest request = new JsonRpcRequest
+            {
+                RequestId = id,
+                JsonRpc = JSON_RPC_VERSION,
+                Method = "self-test",
+                Params = healthStatusRequestParams
+            };
+
+            return Transformer.EncodeJsonRpcRequest(request);
+        }
     }
 }
