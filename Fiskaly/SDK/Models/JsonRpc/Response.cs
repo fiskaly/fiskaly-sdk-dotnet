@@ -98,4 +98,16 @@ namespace Fiskaly.Client.Models
         [JsonProperty("commit_hash")]
         public string CommitHash { get; set; }
     }
+
+    public class HealthStatus
+    {
+        [JsonProperty("proxy")]
+        public string Proxy { get; set; }
+
+        [JsonProperty("smaers")]
+        public string Smaers { get; set; }
+
+        [JsonProperty("backend")]
+        public string backend { get; set; }
+    }
 }

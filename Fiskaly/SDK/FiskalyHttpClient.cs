@@ -207,7 +207,8 @@ namespace Fiskaly
                         ClientTimeout = configuration.ClientTimeout,
                         SmaersTimeout = configuration.SmaersTimeout,
                         DebugFile = configuration.DebugFile,
-                        DebugLevel = (int)configuration.DebugLevel
+                        DebugLevel = (int)configuration.DebugLevel,
+                        HttpProxy = configuration.HttpProxy
                     },
                     Context = Context
                 });
@@ -228,7 +229,8 @@ namespace Fiskaly
                 ClientTimeout = config.ClientTimeout,
                 SmaersTimeout = config.SmaersTimeout,
                 DebugFile = config.DebugFile,
-                DebugLevel = (DebugLevel)config.DebugLevel
+                DebugLevel = (DebugLevel)config.DebugLevel,
+                HttpProxy = config.HttpProxy
             };
         }
 
@@ -265,6 +267,30 @@ namespace Fiskaly
             };
 
             return version;
+        }
+
+        public Models.HealthStatus HealthCheck()
+        {
+            if (!InitialContextSet)
+            {
+                InitializeContext();
+            }
+
+            byte[] payload = PayloadFactory.BuildHealthCheckPayload(
+                DateTime.Now.ToString(), new HealthStatusRequestParams { Context = Context });
+
+            string invocationResponse = Client.Invoke(payload);
+            System.Diagnostics.Debug.WriteLine("HealthCheck[invocationResponse]: " + invocationResponse);
+
+           JsonRpcResponse<HealthStatus> rpcResponse =
+                JsonConvert.DeserializeObject<JsonRpcResponse<HealthStatus>>(invocationResponse);
+
+            return new Models.HealthStatus
+            {
+                Proxy = new Models.ComponentHealth(rpcResponse.Result.Proxy),
+                Smaers = new Models.ComponentHealth(rpcResponse.Result.Smaers),
+                Backend = new Models.ComponentHealth(rpcResponse.Result.backend)
+            };
         }
     }
 }

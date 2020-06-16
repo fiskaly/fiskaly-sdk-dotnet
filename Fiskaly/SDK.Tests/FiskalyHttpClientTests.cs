@@ -160,8 +160,21 @@ namespace Fiskaly.Tests
             var version = client.Version();
 
             Assert.IsNotNull(version);
+        }
 
-            System.Diagnostics.Debug.WriteLine(version);
+        [TestMethod()]
+        public void CanGetHealthStatus()
+        {
+            var client = GetClient(SIGN_API_V1_PATH);
+            var health = client.HealthCheck();
+
+            Assert.IsNotNull(health);
+            Assert.IsNotNull(health.Backend);
+            Assert.IsNotNull(health.Backend.Status);
+            Assert.IsNotNull(health.Proxy);
+            Assert.IsNotNull(health.Proxy.Status);
+            Assert.IsNotNull(health.Smaers);
+            Assert.IsNotNull(health.Smaers.Status);
         }
     }
 }
