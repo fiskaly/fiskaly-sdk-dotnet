@@ -46,7 +46,14 @@ namespace Fiskaly
 
         private void InitializeClient() {
         #if NET40
-            this.Client = new WindowsClient();
+            if (Environment.OSVersion.Platform == PlatformID.Unix)
+            {
+                Client = new LinuxClient();
+            }
+            else
+            {
+                Client = new WindowsClient();
+            }
 
         // Non-Windows platforms are only supported through .NET Standard 2.1 at the moment
         #elif NETSTANDARD2_0
