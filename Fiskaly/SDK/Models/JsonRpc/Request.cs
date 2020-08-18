@@ -71,7 +71,7 @@ namespace Fiskaly.Client.Models
         public Dictionary<string, string> Query { get; set; }
 
         [JsonProperty("headers")]
-        public Dictionary<string, string> Headers { get; set; }
+        public Dictionary<string, object> Headers { get; set; }
     }
 
     public class ConfigParams : JsonRpcParams

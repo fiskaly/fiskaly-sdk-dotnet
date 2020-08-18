@@ -176,5 +176,14 @@ namespace Fiskaly.Tests
             Assert.IsNotNull(health.Smaers);
             Assert.IsNotNull(health.Smaers.Status);
         }
+
+        [TestMethod()]
+        public void QueryParameters()
+        {
+            var client = GetClient(SIGN_API_V1_PATH);
+            var query = new Dictionary<string, string[]>();
+
+            query.Add("states", new string[] {"INITIALIZED", "DISABLED"});
+        }
     }
 }
