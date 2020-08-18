@@ -4,7 +4,16 @@
     {
         private const string JSON_RPC_VERSION = "2.0";
 
-        public static byte[] BuildCreateContextPayload(string id, string apiKey, string apiSecret, string baseUrl)
+        private static JsonRpcRequest BuildRpcRequest(
+            string id,
+            string apiKey,
+            string apiSecret,
+            string baseUrl,
+            string email,
+            string password,
+            string organizationId,
+            string environment
+            )
         {
             JsonRpcRequest request = new JsonRpcRequest
             {
@@ -16,9 +25,36 @@
                     ApiKey = apiKey,
                     ApiSecret = apiSecret,
                     BaseUrl = baseUrl,
-                    SdkVersion = Constants.SDK_VERSION
+                    SdkVersion = Constants.SDK_VERSION,
+                    Email = email,
+                    Password = password,
+                    OrganizationId = organizationId,
+                    Environment = environment
                 }
             };
+
+            return request;
+        }
+
+        public static byte[] BuildCreateContextPayload(string id, string apiKey, string apiSecret, string baseUrl)
+        {
+            var request = BuildRpcRequest(id, apiKey, apiSecret, baseUrl, null, null, null, null);
+
+            return Transformer.EncodeJsonRpcRequest(request);
+        }
+
+        public static byte[] BuildCreateContextPayload(
+            string id,
+            string apiKey,
+            string apiSecret,
+            string baseUrl,
+            string email,
+            string password,
+            string organizationId,
+            string environment
+            )
+        {
+            var request = BuildRpcRequest(id, apiKey, apiSecret, baseUrl, email, password, organizationId, environment);
 
             return Transformer.EncodeJsonRpcRequest(request);
         }

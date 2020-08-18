@@ -44,6 +44,11 @@ namespace Fiskaly
             InitializeClient();
         }
 
+        public FiskalyHttpClient(string apiKey, string apiSecret, string baseUrl, string email, string password)
+        {
+
+        }
+
         private void InitializeClient() {
         #if NET40
             this.Client = new WindowsClient();

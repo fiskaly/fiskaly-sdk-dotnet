@@ -33,6 +33,18 @@ namespace Fiskaly.Client.Models
 
         [JsonProperty("sdk_version")]
         public string SdkVersion { get; set; }
+
+        [JsonProperty("email")]
+        public string Email { get; set; }
+        
+        [JsonProperty("password")]
+        public string Password { get; set; }
+
+        [JsonProperty("organization_id")]
+        public string OrganizationId { get; set; }
+
+        [JsonProperty("environment")]
+        public string Environment { get; set; }
     }
 
     public class RequestParams : JsonRpcParams
