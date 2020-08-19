@@ -178,12 +178,26 @@ namespace Fiskaly.Tests
         }
 
         [TestMethod()]
-        public void QueryParameters()
+        public void QueryParametersArray()
         {
             var client = GetClient(SIGN_API_V1_PATH);
             var query = new Dictionary<string, object>();
 
             query.Add("states", new string[] {"INITIALIZED", "DISABLED"});
+
+            var response = client.Request("GET", "/tss", null, null, query);
+
+            Assert.IsNotNull(response);
+            Assert.AreEqual(200, response.Status);
+        }
+
+        [TestMethod()]
+        public void QueryParametersString()
+        {
+            var client = GetClient(SIGN_API_V1_PATH);
+            var query = new Dictionary<string, object>();
+
+            query.Add("id", "10");
 
             var response = client.Request("GET", "/tss", null, null, query);
 
