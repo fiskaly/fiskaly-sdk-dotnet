@@ -181,9 +181,14 @@ namespace Fiskaly.Tests
         public void QueryParameters()
         {
             var client = GetClient(SIGN_API_V1_PATH);
-            var query = new Dictionary<string, string[]>();
+            var query = new Dictionary<string, object>();
 
             query.Add("states", new string[] {"INITIALIZED", "DISABLED"});
+
+            var response = client.Request("GET", "/tss", null, null, query);
+
+            Assert.IsNotNull(response);
+            Assert.AreEqual(200, response.Status);
         }
     }
 }

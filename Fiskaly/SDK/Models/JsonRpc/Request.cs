@@ -68,10 +68,10 @@ namespace Fiskaly.Client.Models
         public byte[] Body { get; set; }
 
         [JsonProperty("query")]
-        public Dictionary<string, string> Query { get; set; }
+        public Dictionary<string, object> Query { get; set; }
 
         [JsonProperty("headers")]
-        public Dictionary<string, object> Headers { get; set; }
+        public Dictionary<string, string> Headers { get; set; }
     }
 
     public class ConfigParams : JsonRpcParams

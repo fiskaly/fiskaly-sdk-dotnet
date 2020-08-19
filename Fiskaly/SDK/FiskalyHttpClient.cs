@@ -113,7 +113,7 @@ namespace Fiskaly
             System.Diagnostics.Debug.WriteLine("Set context to: " + Context);
         }
 
-        private byte[] CreateRequestPayload(string method, string path, byte[] body, Dictionary<string, object> headers, Dictionary<string, string> query)
+        private byte[] CreateRequestPayload(string method, string path, byte[] body, Dictionary<string, string> headers, Dictionary<string, object> query)
         {
             byte[] payload = PayloadFactory.BuildRequestPayload(DateTime.Now.ToString(),
                 new RequestParams
@@ -123,8 +123,8 @@ namespace Fiskaly
                         Method = method == null ? "GET" : method,
                         Path = path == null ? "/" : path,
                         Body = body == null ? new byte[0] : body,
-                        Headers = headers == null ? new Dictionary<string, object>() : headers,
-                        Query = query == null ? new Dictionary<string, string>() : query
+                        Headers = headers == null ? new Dictionary<string, string>() : headers,
+                        Query = query == null ? new Dictionary<string, object>() : query
                     },
                     Context = Context
                 }

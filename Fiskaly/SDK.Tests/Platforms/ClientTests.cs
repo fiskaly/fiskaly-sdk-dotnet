@@ -43,7 +43,7 @@ namespace Fiskaly.Client.Tests
                         Headers = new Dictionary<string, string>(),
                         Method = "PUT",
                         Path = "/tx",
-                        Query = new Dictionary<string, string>()
+                        Query = new Dictionary<string, object>()
                     },
                     Context = "",
                 }
