@@ -20,6 +20,11 @@ namespace Fiskaly
         private string ApiSecret { get; }
         private string BaseUrl { get; }
 
+        private string Email { get; set; }
+        private string Password { get; set; }
+        private string OrganizationId { get; set; }
+        private string Environment { get; set; }
+
         public FiskalyHttpClient(string apiKey, string apiSecret, string baseUrl)
         {
             if (apiKey == null)
@@ -42,6 +47,22 @@ namespace Fiskaly
             BaseUrl = baseUrl;
 
             InitializeClient();
+        }
+
+        public FiskalyHttpClient(
+            string apiKey,
+            string apiSecret,
+            string baseUrl,
+            string email,
+            string password,
+            string organizationId,
+            string environment
+            ): this(apiKey, apiSecret, baseUrl)
+        {
+            this.Email = email;
+            this.Password = password;
+            this.OrganizationId = organizationId;
+            this.Environment = environment;
         }
 
         private void InitializeClient() {
@@ -83,7 +104,8 @@ namespace Fiskaly
         private void InitializeContext()
         {
             byte[] payload = PayloadFactory
-                .BuildCreateContextPayload(DateTime.Now.ToString(), ApiKey, ApiSecret, BaseUrl);
+                .BuildCreateContextPayload(DateTime.Now.ToString(),
+                    ApiKey, ApiSecret, BaseUrl, Email, Password, OrganizationId, Environment);
 
             string createContextResponse = Client.Invoke(payload);
             System.Diagnostics.Debug.WriteLine("CreateContextResponse: " + createContextResponse);
@@ -98,7 +120,7 @@ namespace Fiskaly
             System.Diagnostics.Debug.WriteLine("Set context to: " + Context);
         }
 
-        private byte[] CreateRequestPayload(string method, string path, byte[] body, Dictionary<string, string> headers, Dictionary<string, string> query)
+        private byte[] CreateRequestPayload(string method, string path, byte[] body, Dictionary<string, string> headers, Dictionary<string, object> query)
         {
             byte[] payload = PayloadFactory.BuildRequestPayload(DateTime.Now.ToString(),
                 new RequestParams
@@ -109,7 +131,7 @@ namespace Fiskaly
                         Path = path == null ? "/" : path,
                         Body = body == null ? new byte[0] : body,
                         Headers = headers == null ? new Dictionary<string, string>() : headers,
-                        Query = query == null ? new Dictionary<string, string>() : query
+                        Query = query == null ? new Dictionary<string, object>() : query
                     },
                     Context = Context
                 }
@@ -173,7 +195,7 @@ namespace Fiskaly
             }
         }
 
-        public FiskalyHttpResponse Request(string method, string path, byte[] body, Dictionary<string, string> headers, Dictionary<string, string> query)
+        public FiskalyHttpResponse Request(string method, string path, byte[] body, Dictionary<string, string> headers, Dictionary<string, object> query)
         {
             if (!InitialContextSet)
             {
