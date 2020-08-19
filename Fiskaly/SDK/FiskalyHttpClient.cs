@@ -67,7 +67,7 @@ namespace Fiskaly
 
         private void InitializeClient() {
         #if NET40
-            if (Environment.OSVersion.Platform == PlatformID.Unix)
+            if (System.Environment.OSVersion.Platform == PlatformID.Unix)
             {
                 Client = new LinuxClient();
             }
