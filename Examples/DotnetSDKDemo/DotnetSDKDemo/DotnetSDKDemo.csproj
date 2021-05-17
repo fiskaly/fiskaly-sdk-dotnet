@@ -76,7 +76,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="fiskaly-dotnet-sdk, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\fiskaly-dotnet-sdk.1.1.300\lib\net40\fiskaly-dotnet-sdk.dll</HintPath>
+      <HintPath>..\packages\fiskaly-dotnet-sdk.1.2.200\lib\net40\fiskaly-dotnet-sdk.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>

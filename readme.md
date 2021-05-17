@@ -24,11 +24,11 @@ The .NET SDK is available for download on [NuGet](https://www.nuget.org/packages
 
 #### Package Manager
 
-`PM> Install-Package fiskaly-dotnet-sdk -Version 1.2.100`
+`PM> Install-Package fiskaly-dotnet-sdk -Version 1.2.200`
 
 #### .NET (dotnet) CLI
 
-`$ dotnet add package fiskaly-dotnet-sdk --version 1.2.100`
+`$ dotnet add package fiskaly-dotnet-sdk --version 1.2.200`
 
 ### Client
 
