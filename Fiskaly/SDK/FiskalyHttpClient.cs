@@ -318,7 +318,7 @@ namespace Fiskaly
             {
                 Proxy = new Models.ComponentHealth(rpcResponse.Result.Proxy),
                 Smaers = new Models.ComponentHealth(rpcResponse.Result.Smaers),
-                Backend = new Models.ComponentHealth(rpcResponse.Result.backend)
+                Backend = rpcResponse.Result.backend
             };
         }
     }

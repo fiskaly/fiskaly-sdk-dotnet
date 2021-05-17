@@ -170,7 +170,6 @@ namespace Fiskaly.Tests
 
             Assert.IsNotNull(health);
             Assert.IsNotNull(health.Backend);
-            Assert.IsNotNull(health.Backend.Status);
             Assert.IsNotNull(health.Proxy);
             Assert.IsNotNull(health.Proxy.Status);
             Assert.IsNotNull(health.Smaers);
