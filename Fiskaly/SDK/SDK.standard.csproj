@@ -11,12 +11,12 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Fiskaly</RootNamespace>
     <AssemblyName>fiskaly-dotnet-sdk</AssemblyName>
-    <AssemblyVersion>1.2.100</AssemblyVersion>
+    <AssemblyVersion>1.2.200</AssemblyVersion>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <EnableDefaultCompileItems>true</EnableDefaultCompileItems>
     <Authors>Benjamin Auinger</Authors>
     <Company>fiskaly GmbH</Company>
-    <VersionPrefix>1.2.100</VersionPrefix>
+    <VersionPrefix>1.2.200</VersionPrefix>
     <VersionSuffix></VersionSuffix>
   </PropertyGroup>
 
