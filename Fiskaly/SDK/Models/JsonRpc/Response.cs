@@ -108,6 +108,6 @@ namespace Fiskaly.Client.Models
         public string Smaers { get; set; }
 
         [JsonProperty("backend")]
-        public string backend { get; set; }
+        public Dictionary<string, string> backend { get; set; }
     }
 }

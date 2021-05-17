@@ -53,7 +53,7 @@
     <Authors>benjamin.fiskaly;fiskaly</Authors>
     <PackageDescription>This package contains the fiskaly .NET SDK which should be used to work with our services.</PackageDescription>
     <Copyright>fiskaly GmbH</Copyright>
-    <PackageReleaseNotes>v1.2.100 - Add constructor with Management-API properties</PackageReleaseNotes>
+    <PackageReleaseNotes>v1.2.200 - migrate type of backend from string to Dictionary</PackageReleaseNotes>
     <PackageTags>fiskaly dotnet-sdk fiskaly-dotnet-sdk kassensichv tse cloud-tse</PackageTags>
     <RepositoryType>GitHub</RepositoryType>
     <RepositoryUrl>https://github.com/fiskaly/fiskaly-sdk-dotnet</RepositoryUrl>

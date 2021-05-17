@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Fiskaly.Models
 {
@@ -8,7 +6,7 @@ namespace Fiskaly.Models
     {
         public ComponentHealth Proxy { get; set; }
         public ComponentHealth Smaers { get; set; }
-        public ComponentHealth Backend { get; set; }
+        public Dictionary<string, string> Backend { get; set; }
 
         public override string ToString()
         {
