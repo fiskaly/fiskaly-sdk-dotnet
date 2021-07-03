@@ -1,0 +1,88 @@
+name: CI || fiskaly .NET SDK
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: nuget/setup-nuget@v1
+
+    - name: Install dependencies
+      run: nuget restore Fiskaly/SDK/SDK.standard.csproj
+
+    - name: Build fiskaly .NET SDK
+      run: dotnet build --configuration Release --no-restore Fiskaly/SDK/SDK.standard.csproj
+
+    - uses: actions/upload-artifact@master
+      with:
+        name: fiskaly-dotnet-sdk-net40
+        path: Fiskaly/SDK/bin/Release/net40/fiskaly-dotnet-sdk.dll
+
+    - uses: actions/upload-artifact@master
+      with:
+        name: fiskaly-dotnet-sdk-netstandard2.0
+        path: Fiskaly/SDK/bin/Release/netstandard2.0
+
+  test-windows:
+    needs: build
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Download SDK DLL for Windows
+      uses: actions/download-artifact@master
+      with:
+        name: fiskaly-dotnet-sdk-net40
+        path: Fiskaly/SDK.Tests/bin/Release/netcoreapp2.0
+
+    - name: Install dependencies for Windows
+      run: dotnet restore Fiskaly/SDK.Tests/SDK.Tests.csproj
+
+    - name: Download Client
+      shell: pwsh
+      run: powershell .\download-client.ps1
+
+    - name: Run Unit Tests
+      shell: pwsh
+      env:
+        FISKALY_API_KEY: ${{ secrets.FISKALY_API_KEY }}
+        FISKALY_API_SECRET: ${{ secrets.FISKALY_API_SECRET }}
+      run: dotnet test --configuration Release Fiskaly/SDK.Tests/SDK.Tests.csproj
+
+  test-linux:
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dotnet: [ '2.2.103', '3.0.100' ]
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: actions/setup-dotnet@v1
+    - name: Setup dotnet
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ matrix.dotnet }}
+
+    - name: Install dependencies for Linux
+      run: dotnet restore Fiskaly/SDK.Tests/SDK.Tests.csproj
+
+    - uses: actions/download-artifact@master
+      name: Download SDK DLL for Linux
+      with:
+        name: fiskaly-dotnet-sdk-netstandard2.0
+        path: Fiskaly/SDK.Tests/bin/Release/netcoreapp2.0
+
+    - name: Run Unit Tests
+      shell: bash
+      env:
+        FISKALY_API_KEY: ${{ secrets.FISKALY_API_KEY }}
+        FISKALY_API_SECRET: ${{ secrets.FISKALY_API_SECRET }}
+      run: ls -R && dotnet test --configuration Release Fiskaly/SDK.Tests/SDK.Tests.csproj
+
